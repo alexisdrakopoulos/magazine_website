@@ -10,7 +10,7 @@ export default function Navbar() {
             <a href="/">
               <Image
                 src="/logo-ae2c55d5.svg"
-                alt="Increment"
+                alt="minorversion"
                 width={150}
                 height={150}
               ></Image>
@@ -18,8 +18,8 @@ export default function Navbar() {
           </h1>
           <ul className="nav">
             <li>
-              <Link href="/issues/">
-                <span>Issues</span>
+              <Link href="/blog/">
+                <span>Blog</span>
               </Link>
             </li>
             <li>
@@ -28,13 +28,13 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="https://store.increment.com/">
-                <span>Store</span>
+              <Link href="/about/">
+                <span>About</span>
               </Link>
             </li>
             <li>
-              <Link href="/about/">
-                <span>About</span>
+              <Link href="/contact/">
+                <span>Contact</span>
               </Link>
             </li>
           </ul>
