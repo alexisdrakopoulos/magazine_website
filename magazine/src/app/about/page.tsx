@@ -1,4 +1,4 @@
-const AboutLayout = () => {
+function AboutLayout() {
   return (
     <div className="ArticlePage">
       <header className="u-Container ArticleHeader">
@@ -8,6 +8,6 @@ const AboutLayout = () => {
       </header>
     </div>
   );
-};
+}
 
-AboutLayout;
+export default AboutLayout;
