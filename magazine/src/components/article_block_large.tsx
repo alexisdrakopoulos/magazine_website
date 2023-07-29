@@ -1,0 +1,40 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+type ArticleBlockLargeProps = {
+  href: string;
+  image_src: string;
+  image_alt: string;
+  title: string;
+  paragraph: string;
+};
+
+const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
+  href,
+  image_src,
+  image_alt,
+  title,
+  paragraph,
+}) => (
+  <li className="ArticleBlock large">
+    <Link href={href}>
+      <div className="u-Art art">
+        <Image src={image_src} width={500} height={500} alt={image_alt} />
+      </div>
+      <div className="text">
+        <div className="head">
+          <h3
+            className="t-TitleSerif large title"
+            style={{ maxWidth: "217px" }}
+          >
+            {title}
+          </h3>
+        </div>
+        <div className="t-BodySans large intro">{paragraph}</div>
+      </div>
+    </Link>
+  </li>
+);
+
+export default ArticleBlockLarge;
