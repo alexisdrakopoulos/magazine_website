@@ -15,8 +15,8 @@ const mdxComponents: MDXComponents = {
   NoticeBox: (props: NoticeProps) => <NoticeBox {...props} />,
 };
 
-export const generateStaticParams = () =>
-  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
+// export const generateStaticParams = () =>
+//   allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
