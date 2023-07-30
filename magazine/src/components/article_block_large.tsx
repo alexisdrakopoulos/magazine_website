@@ -20,13 +20,19 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
   <li className="ArticleBlock large">
     <Link href={href}>
       <div className="u-Art art">
-        <Image src={image_src} width={500} height={500} alt={image_alt} />
+        <Image
+          src={image_src}
+          width={500}
+          height={500}
+          alt={image_alt}
+          unoptimized
+        />
       </div>
       <div className="text">
         <div className="head">
           <h3
             className="t-TitleSerif large title"
-            style={{ maxWidth: "217px" }}
+            // style={{ maxWidth: "400px" }} // NOT SURE WHY WE WANT THIS?
           >
             {title}
           </h3>

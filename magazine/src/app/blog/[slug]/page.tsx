@@ -1,6 +1,18 @@
 import { format, parseISO } from "date-fns";
 import { allPosts } from "contentlayer/generated";
-import { Mdx } from "@/components/mdx-components";
+import NoticeBox from "@/components/notice_box";
+import { NoticeProps } from "@/components/notice_box";
+import type { MDXComponents } from "mdx/types";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import Link from "next/link";
+
+// Define your custom MDX components.
+const mdxComponents: MDXComponents = {
+  // Override the default <a> element to use the next/link component.
+  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
+  // Add a custom component.
+  NoticeBox: (props: NoticeProps) => <NoticeBox {...props} />,
+};
 
 export const generateStaticParams = async () =>
   allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
@@ -14,6 +26,8 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
+
+  const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <div className="ArticlePage">
@@ -34,7 +48,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
       </header>
       <div className="u-Container ArticleContent">
         <div className="ContentBody column">
-          <Mdx code={post.body.code} />
+          <MDXContent components={mdxComponents} />{" "}
         </div>
       </div>
     </div>

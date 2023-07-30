@@ -10,26 +10,24 @@ export default function Home() {
         <ul className="u-Grid column">
           <ArticleBlockLarge
             href="/reframing-tech-debt_2x.png"
-            image_src="/reframing-tech-debt_2x.png"
+            image_src="/finite_state_machine.jpg"
             image_alt="Picture of the author"
-            title="Reframing tech debt"
-            paragraph="If we bake addressing tech debt into our plans, could it
-            become an opportunity to build abundance into
-            our&nbsp;systems?"
+            title="Machine Learning Models as Finite State Machines"
+            paragraph="Are ML Models in modern OOP toolkits finite state machines? My goal is not to convince you that this has some deeper implication, but rather to discuss the resulting design implications and review the current approaches in many OSS libraries."
           />
           <ArticleBlockHalf
             href="/reframing-tech-debt_2x.png"
-            image_src="/reframing-tech-debt_2x.png"
+            image_src="/snake_in_jungle.jpg"
             image_alt="Picture of the author"
-            title="Reframing tech debt"
-            paragraph="On reimagining planning as a dynamic and generative process."
+            title="Python Caching Overview"
+            paragraph="Caching from functools to Redis, and everything in between."
           />
           <ArticleBlockHalf
             href="/reframing-tech-debt_2x.png"
-            image_src="/reframing-tech-debt_2x.png"
+            image_src="/complex_snakes.png"
             image_alt="Picture of the author"
-            title="Reframing tech debt"
-            paragraph="On reimagining planning as a dynamic and generative process."
+            title="Annoying Python Patterns"
+            paragraph="We look beyond spaghetti code and nasty one liners, and discuss commonly found patterns which range from unaesthetic to outright dangerous."
           />
           <ArticleBlock
             href="/reframing-tech-debt_2x.png"

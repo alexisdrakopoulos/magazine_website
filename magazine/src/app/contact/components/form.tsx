@@ -41,8 +41,8 @@ export const Form = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="bg-white p-10">
-        <div className="mb-4">
+      <form onSubmit={handleSubmit}>
+        <div>
           <label className="t-TitleSans title" htmlFor="name">
             Name
           </label>
@@ -58,7 +58,7 @@ export const Form = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div>
           <label className="t-TitleSans title" htmlFor="company">
             Company
           </label>
@@ -73,7 +73,7 @@ export const Form = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div>
           <label className="t-TitleSans title" htmlFor="email">
             Email
           </label>
@@ -89,7 +89,7 @@ export const Form = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div>
           <label className="t-TitleSans title" htmlFor="message">
             Message
           </label>
@@ -103,12 +103,7 @@ export const Form = () => {
             maxLength={1000}
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue rounded-md text-white hover:text-blue hover:bg-white min-w-100 px-5 h-12 border border-slate-300 hover:border-indigo-300hover:border-1"
-        >
-          Send Message
-        </button>
+        <button type="submit">Send Message</button>
       </form>
       {isMessageSent && <p> Message has been Sent</p>}
     </>

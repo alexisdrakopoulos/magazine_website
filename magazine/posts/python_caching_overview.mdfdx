@@ -1,0 +1,198 @@
+---
+title: "Python Caching Overview"
+date: 2023-02-18
+intro: "An overview of caching in Python, including custom implementations, functools and joblib."
+---
+
+[Caching](<https://en.wikipedia.org/wiki/Cache_(computing)>) is an often overlooked yet performance critical component of most modern software.
+
+In this article we will discuss caching in a Python context, as well as give examples as to where and what problems caching solutions solve in the real world.
+
+We will start by looking at custom implementations using both the [standard library](https://docs.python.org/3/library/) as well as exploring third party options, before moving onto more enterprise solutions involving tools such as [Redis](https://redis.io/).
+
+## What is Caching?
+
+When we discuss caching we usually mean a specific type of caching referred to as [memoization](https://en.wikipedia.org/wiki/Memoization). The idea is simple, given some function `f(x) = y` we wish to memorize `y` for specific values of `x` to avoid having to call `f()`.
+
+<NoticeBox
+  notice="This is a Notice"
+  noticeText="This strategy is also the cornerstone of [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming), a technique leveraging memoization to make [recursive](https://en.wikipedia.org/wiki/Recursion) approaches tractable."
+  noticeType="note"
+/>
+
+We will now implement a minimal example of memoization; imagine you have some function which squares whatever integer you pass it, however for some reason it takes 5 seconds to run.
+
+```python
+from time import sleep
+
+def square(x: int) -> int:
+    sleep(5)
+    return x**2
+```
+
+In order to benchmark this we'll just use the [time](https://docs.python.org/3/library/time.html) module.
+
+```python
+from time import time
+
+x = 2
+
+start = time()
+y = square(x=x)
+end = time()
+
+print(f"Function square({x=}) took {end - start} seconds to run and returned {y=}")
+```
+
+which prints out the following on my machine:
+
+```text
+Function square(x=2) took 5.005853176116943 seconds to run and returned y=4
+```
+
+What if instead, every time we ran `square()` we first tried to see whether we had run it before, if yes return a saved result and if not run it and save the result. This is memoization.
+
+```python
+# cache where keys will be "x" and values the corresponding "y"
+cache: dict[int, int] = {}
+
+def square(x: int) -> int:
+    # check if x is currently in our cache
+    if x in cache:
+        y = cache[x] # retrieve y from cache
+    # if not in cache we proceed to run the logic and store to cache
+    else:
+        sleep(5)
+        y = x**2
+        cache[x] = y # store y in cache
+
+    return y
+
+for _ in range(2):
+    start = time()
+    y = square(x=x)
+    end = time()
+
+    print(f"Function square({x=}) took {end - start} seconds to run and returned {y=}")
+```
+
+We now get:
+
+```text
+Function square(x=2) took 5.002596139907837 seconds to run and returned y=4
+Function square(x=2) took 6.198883056640625e-06 seconds to run and returned y=4
+```
+
+To summarize, we can create a basic caching solution by hashing the `args` of our func `f(*args)`, computing `f(*args) = y` once, and storing `y` in a [hashtable](https://en.wikipedia.org/wiki/Hash_table). This allows us to access cached results in $O(1)$ time and $O(n)$ space.
+
+### When not to Cache
+
+One might ask, why not cache everything? Here are some potential reasons to avoid caching:
+
+- Introduces additional complexity and points of failure.
+- Doesn't aid performance in functions which run quickly.
+- Large memory/storage overhead for large outputs.
+
+It is usually best to avoid [premature optimization](https://en.wiktionary.org/wiki/premature_optimization#English), which includes implementing a cache, and first check whether your software needs and would actually benefit from one.
+
+## Functools
+
+The Python standard library includes the [functools](https://docs.python.org/3/library/functools.html) module which contains several simple functions designed to add caching to your code. We cover the underlying implementation of this in another [article]("/posts/cpython_internals/functools_cache.md" >).
+
+Functools offers several caching functions:
+
+- `functools.cache`: which just returns `functools.lru_cache(maxsize=None)`.
+- `functools.lru_cache`: the core caching func covered in our other [article]({{< ref "/posts/cpython_internals/functools_cache.md" >}}).
+- `functools.cached_property`: aimed at caching expensive to compute object properties, we'll ignore this for now.
+
+We can therefore just focus on `functools.lru_cache`:
+
+```python
+from functools import lru_cache
+```
+
+`lru_cache` uses, as can be gathered from the name, the popular Least Recently Used (LRU) [cache policy](https://en.wikipedia.org/wiki/Cache_replacement_policies) which caches a user defined number of outputs and discards the oldest ones. LRU as a caching policy is used across the world in large-scale production environments, however may not always be the best policy depending on your specific problem.
+
+We can now implement `square()` using `lru_cache`:
+
+```python
+@lru_cache(maxsize=128)
+def square(x: int) -> int:
+    sleep(5)
+    return x**2
+```
+
+So if we have such a simple solution to caching, why wouldn't we use it everywhere? Well let's try:
+
+```python
+@lru_cache(maxsize=128)
+def square_all_values(x_vals: list[int]):
+    sleep(5)
+    return [x**2 for x in x_vals]
+
+square_all_values([1, 2, 3])
+```
+
+oh dear:
+
+```text
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [100], in <cell line: 1>()
+----> 1 square_all_values([1, 2, 3])
+
+TypeError: unhashable type: 'list'
+```
+
+Turns out that any solution, including our custom one, cannot be used on functions which contain arguments which cannot be hashed. If you're curious as to why, we discuss this in another [article]({{< ref "/posts/cpython_internals/functools_cache.md" >}}).
+
+This solution also doesn't really allow us to keep track of what we have cached, how much space it's using, how often our cache gets hit or anything else we may want in a production environment. It is also in memory with no option to cache to disk, meaning that on interpreter restart we'd have to rebuild our cache from scratch.
+
+## `joblib.Memory`
+
+Joblib describes [itself](https://joblib.readthedocs.io/en/latest/index.html#module-joblib) as a set of tools to provide lightweight pipelining in Python. One of these is caching, with the other focusing on [paralellism](https://en.wikipedia.org/wiki/Parallel_computing). Only the former is of use to us in this article.
+
+It's caching solution uses [md5](https://en.wikipedia.org/wiki/MD5) hashing which is capable of hashing far more Python objects than the base python hash implementations.
+
+`joblib.Memory` uses this hashing along with the use of the [pickle](https://docs.python.org/3/library/pickle.html) to serialize objects.
+
+<NoticeBox text="There exist alternatives to pickle which can serialize more objects such as [dill](https://github.com/uqfoundation/dill)." />
+
+It is therefore able to use persistent on-disk hashing rather than just in-memory as is the case with functools.
+
+We can also use it as a simple decorator:
+
+```python
+import joblib
+
+memory = joblib.Memory("cache_dir", verbose=0)
+
+@memory.cache
+def square_all_values(x_vals: list[int]):
+    sleep(5)
+    return [x**2 for x in x_vals]
+
+square_all_values([1, 2, 3])
+```
+
+The key difference is that since we persist to disk we instantiate it with a given directory path, on which the cache is stored. This then gives us a `Memory` object which has a method `cache` which can be used as a decorator.
+
+This use of caching can be quite powerful and can even cache complex objects that often occur in scientific contexts such as large [NumPy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html) or [Pandas DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). It is however still relegated to caching within specific code bases in a localised environment. If you wanted to cache to a separate database, or scale to a distributed system, or have read/write replicas you would most likely use another more appropriate caching approach.
+
+## Conclusion
+
+So far we have seen functools as well as joblib, both of which are acceptable for small projects, isolated libraries or specific uses (such as joblib in a lot of ML workloads). They however lack observability, scalability and require custom solutions to deploy. Caching is used throughout various stacks to reduce latency and unecessary compute.
+
+### Popular Caching Examples
+
+[Redis](https://redis.io/) is a popular in-memory database (with on-disk backups available) which is widely used for caching across the modern web. Redis is also not Python specific, though there are Python APIs for it such as [redis-py](https://github.com/redis/redis-py). RealPython covers this library in depth in this [article](https://realpython.com/python-redis/).
+
+Content delivery networks such as [cloudflare](https://www.cloudflare.com/), from which must of the web is served, use custom [caching solutions](https://developers.cloudflare.com/cache/) to improve latency by hosting cached copies of websites on servers across the world, and providing users with the closest copies.
+
+[Dropbox](https://www.dropbox.com/) also implements their own [caching solution](https://dropbox.tech/infrastructure/caching-in-theory-and-practice) which uses an implementation of LRU!
+
+[Netflix](https://www.netflix.com/) uses a [custom caching approach](https://openconnect.netflix.com/en/) which includes custom hardware deployed at ISPs which store copies of popular content. This reduces the load on the ISP itself as when a user requests a piece of cached content, it can quickly deliver it without needing to fetch it from some other server.
+
+[Google Cloud](https://cloud.google.com/) announced a new [media CDN](https://cloud.google.com/blog/products/networking/introducing-media-cdn) which leverages the same infrastructure [YouTube](https://youtube.com) uses to serve its content.
+
+There are countless more examples, however I hope these give you a good start down an interesting rabbit hole!

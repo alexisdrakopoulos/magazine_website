@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 export async function POST(request: NextRequest) {
 	const data = await request.json();

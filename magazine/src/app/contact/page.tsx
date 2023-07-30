@@ -11,7 +11,7 @@ export default function Contact() {
               <div className="head">
                 <h3 className="t-TitleSans title">Contact Us</h3>
               </div>
-              <div className="t-BodySerif  intro">
+              <div className="t-BodySerif intro">
                 Feel free to reach out with questions, suggestions, or just to
                 say hello!
               </div>
