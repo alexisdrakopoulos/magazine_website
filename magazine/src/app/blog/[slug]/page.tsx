@@ -5,6 +5,7 @@ import { NoticeProps } from "@/components/notice_box";
 import type { MDXComponents } from "mdx/types";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Link from "next/link";
+import Image from "next/image";
 
 // Define your custom MDX components.
 const mdxComponents: MDXComponents = {
@@ -20,8 +21,21 @@ export const generateStaticParams = async () =>
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
-  return { title: post.title, intro: post.intro };
+  return {
+    title: post.title,
+    intro: post.intro,
+    date: post.date,
+    image: post.image,
+  };
 };
+
+const ImageComponent = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="u-Container art">
+    <div className="u-Art">
+      <Image src={src} width={500} height={500} alt={alt} unoptimized />
+    </div>
+  </div>
+);
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
@@ -32,6 +46,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   return (
     <div className="ArticlePage">
       <header className="u-Container ArticleHeader">
+        {post.image && <ImageComponent src={post.image} alt="test" />}
         <div className="column">
           <div className="u-Grid">
             <div className="main">
