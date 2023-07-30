@@ -9,10 +9,10 @@ export default function Navbar() {
           <h1 className="logo gap">
             <a href="/">
               <Image
-                src="/logo-ae2c55d5.svg"
+                src="/temporary_logo.svg"
                 alt="minorversion"
-                width={150}
-                height={150}
+                width={300}
+                height={60}
               ></Image>
             </a>
           </h1>
