@@ -1,5 +1,5 @@
 import React from "react";
-// import { Form } from "./components/form";
+import { Form } from "./components/form";
 
 export default function Contact() {
   return (
@@ -19,7 +19,9 @@ export default function Contact() {
           </li>
           <li className="ArticleBlock">
             <div className="text">
-              <div className="">{/* <Form /> */}</div>
+              <div className="">
+                <Form />
+              </div>
             </div>
           </li>
         </ul>
