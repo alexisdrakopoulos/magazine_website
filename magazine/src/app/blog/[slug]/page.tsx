@@ -10,7 +10,7 @@ import Image from "next/image";
 // Define your custom MDX components.
 const mdxComponents: MDXComponents = {
   // Override the default <a> element to use the next/link component.
-  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
+  // a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
   // Add a custom component.
   NoticeBox: (props: NoticeProps) => <NoticeBox {...props} />,
 };

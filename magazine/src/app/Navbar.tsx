@@ -37,14 +37,14 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/about" replace>
+              <Link href="/about">
                 <span className={["nav-item", trispace.className].join(" ")}>
                   About
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/contact" replace>
+              <Link href="/contact">
                 <span className={["nav-item", trispace.className].join(" ")}>
                   Contact
                 </span>
