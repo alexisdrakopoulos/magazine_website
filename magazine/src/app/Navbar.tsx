@@ -30,25 +30,25 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <a href="/topics/">
+              <Link href="/topics">
                 <span className={["nav-item", trispace.className].join(" ")}>
                   Topics
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/about/">
+              <Link href="/about">
                 <span className={["nav-item", trispace.className].join(" ")}>
                   About
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact/">
+              <Link href="/contact" prefetch={false}>
                 <span className={["nav-item", trispace.className].join(" ")}>
                   Contact
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
