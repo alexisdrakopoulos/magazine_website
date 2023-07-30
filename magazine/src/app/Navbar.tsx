@@ -18,11 +18,6 @@ export default function Navbar() {
           </h1>
           <ul className="nav">
             <li>
-              <Link href="/blog/">
-                <span>Blog</span>
-              </Link>
-            </li>
-            <li>
               <Link href="/topics/">
                 <span>Topics</span>
               </Link>
