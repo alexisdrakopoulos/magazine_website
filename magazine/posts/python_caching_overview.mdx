@@ -14,11 +14,12 @@ We will start by looking at custom implementations using both the [standard libr
 
 When we discuss caching we usually mean a specific type of caching referred to as [memoization](https://en.wikipedia.org/wiki/Memoization). The idea is simple, given some function `f(x) = y` we wish to memorize `y` for specific values of `x` to avoid having to call `f()`.
 
-<NoticeBox
-  notice="This is a Notice"
-  noticeText="This strategy is also the cornerstone of [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming), a technique leveraging memoization to make [recursive](https://en.wikipedia.org/wiki/Recursion) approaches tractable."
-  noticeType="note"
-/>
+<NoticeBox notice="This is a Notice" noticeType="note">
+  This strategy is also the cornerstone of [dynamic
+  programming](https://en.wikipedia.org/wiki/Dynamic_programming), a technique
+  leveraging memoization to make
+  [recursive](https://en.wikipedia.org/wiki/Recursion) approaches tractable.
+</NoticeBox>
 
 We will now implement a minimal example of memoization; imagine you have some function which squares whatever integer you pass it, however for some reason it takes 5 seconds to run.
 
@@ -102,7 +103,7 @@ The Python standard library includes the [functools](https://docs.python.org/3/l
 Functools offers several caching functions:
 
 - `functools.cache`: which just returns `functools.lru_cache(maxsize=None)`.
-- `functools.lru_cache`: the core caching func covered in our other [article]({{< ref "/posts/cpython_internals/functools_cache.md" >}}).
+- `functools.lru_cache`: the core caching func covered in our other [article]("/blog/cpython_internals/functools_cache.md").
 - `functools.cached_property`: aimed at caching expensive to compute object properties, we'll ignore this for now.
 
 We can therefore just focus on `functools.lru_cache`:
@@ -144,7 +145,7 @@ Input In [100], in <cell line: 1>()
 TypeError: unhashable type: 'list'
 ```
 
-Turns out that any solution, including our custom one, cannot be used on functions which contain arguments which cannot be hashed. If you're curious as to why, we discuss this in another [article]({{< ref "/posts/cpython_internals/functools_cache.md" >}}).
+Turns out that any solution, including our custom one, cannot be used on functions which contain arguments which cannot be hashed. If you're curious as to why, we discuss this in another [article]("/blog/cpython_internals/functools_cache.md").
 
 This solution also doesn't really allow us to keep track of what we have cached, how much space it's using, how often our cache gets hit or anything else we may want in a production environment. It is also in memory with no option to cache to disk, meaning that on interpreter restart we'd have to rebuild our cache from scratch.
 
@@ -156,7 +157,10 @@ It's caching solution uses [md5](https://en.wikipedia.org/wiki/MD5) hashing whic
 
 `joblib.Memory` uses this hashing along with the use of the [pickle](https://docs.python.org/3/library/pickle.html) to serialize objects.
 
-<NoticeBox text="There exist alternatives to pickle which can serialize more objects such as [dill](https://github.com/uqfoundation/dill)." />
+<NoticeBox notice="This is a Notice" noticeType="note">
+  There exist alternatives to pickle which can serialize more objects such as
+  [dill](https://github.com/uqfoundation/dill).
+</NoticeBox>
 
 It is therefore able to use persistent on-disk hashing rather than just in-memory as is the case with functools.
 
