@@ -454,7 +454,7 @@ a {
   position: absolute;
   z-index: 20;
   left: 50%;
-  top: 100%;
+  top: 50%;
   width: 120px;
   transform:translate(-50%, -50%)
 }
