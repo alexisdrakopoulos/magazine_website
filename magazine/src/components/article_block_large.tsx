@@ -22,8 +22,14 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
       <div className="u-Art art">
         <Image
           src={image_src}
-          width={500}
-          height={500}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+            paddingBottom: "3px",
+          }} // optional
           alt={image_alt}
           unoptimized
         />

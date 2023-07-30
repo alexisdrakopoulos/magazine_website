@@ -1,0 +1,159 @@
+---
+title: "Annoying Python Patterns"
+date: 2023-02-26
+intro: We look beyond spaghetti code and nasty one liners, and discuss commonly found patterns which range from unaesthetic to outright dangerous.
+image: "/complex_snakes.png"
+---
+
+This article will not cover spaghetti code or nasty one liners, but rather complain and discuss commonly found patterns which range from mildly annoying or unaesthetic all the way to outright dangerous. Patterns discussed here are ones I have come across in production code. Note that all production code has been abstracted away and may come from open-source software or industry code bases. Some patterns discussed might mainly occur in ML or scientific code bases, however most will be relevant to all Python programmers.
+
+We do not offer solutions to each antipattern, but do try to discuss why these problems may occur. It's important to recognise that problems deeper in a code base, such as nasty funcs to handle edge cases with a dozen conditionals, are often a symptom of bad upstream design.
+
+# Nones & NaNs
+
+From optional args and returns to placeholder variables, None is the bane of clean code.
+
+## could this arg be None? maybe...
+
+Here is the worst example I have ever seen of what optional args can do to a code base:
+
+```python
+def multiply_potentially_nones(arg1: Optional[float] = None,
+                               arg2: Optional[float] = None) -> float:
+    if arg1 is not None and arg2 is not None:
+        return arg1*arg2
+    if arg1 is None and arg2 is not None:
+        return arg2
+    if arg1 is not None and arg2 is None:
+        return arg1
+```
+
+While this could be simplified to something like:
+
+```python
+arg1 = arg1 if arg1 is not None else 1.0
+arg2 = arg2 if arg2 is not None else 1.0
+return arg1*arg2
+```
+
+which is mildly cleaner, it's still painful to read and quite hacky.
+
+## if not None
+
+This brings us to the
+
+```python
+x = x if x is not None else replacement_var
+```
+
+or
+
+```python
+x = replacement_var if x is None else x
+```
+
+## or
+
+We now come to the first dangerous pattern! Using conditional statements to abuse Pythons truethiness/falsiness of various datatypes. In case you aren't aware, here's the behavior that is abused:
+
+```python
+print(None or "hi there")
+>>> hi there
+```
+
+In production this hides and looks like:
+
+```python
+x: dict = x or {}
+```
+
+which is often hidden tucked away in the return statement.
+
+So why is this so bad?
+
+Not only `None` is falsy!
+
+```python
+print([] or "hi there")
+print("" or "hi there")
+print({} or "hi there")
+print(0 or "hi there")
+print(0.0 or "hi there")
+```
+
+print statements are perhaps not the best way to highlight this, you can also do `bool([])`.
+
+So doing:
+
+```python
+x: dict = x or {}
+```
+
+will `return {}` if x is any falsy value, rather than a None. This is extremely dangerous, for example imagine our previous func `multiply_potentially_nones`:
+
+```python
+def multiply_potentially_nones(arg1: Optional[float] = None,
+                               arg2: Optional[float] = None) -> float:
+    arg1 = arg1 or 1.0
+    arg2 = arg2 or 1.0
+    return arg1*arg2
+
+print(multiply_potentially_nones(5, None))
+>>> 5.0 # wooo!
+print(multiply_potentially_nones(5, 0.0))
+>>> 5.0 # oh dear
+```
+
+# Other Common Antipatterns
+
+I'll also include a section detailing common issues
+
+## Mutable Default Args
+
+Using [mutable](https://en.wikipedia.org/wiki/Mutability) types as default args, such as:
+
+```python
+def f(arg1: list = []):
+    ...
+```
+
+is either irresponsible (when exploiting the mutable property is not intended), or hacky!
+
+## Gotta Catch them All!
+
+Unlike Pokemon, you should not catch all your [exceptions](https://docs.python.org/3/tutorial/errors.html).
+
+```python
+try:
+    ...
+except:
+    print("Glad we avoided that error!")
+```
+
+## Globals
+
+```python
+x: int = 0
+
+def f():
+    global x
+    x += 1
+```
+
+## `Obj.__magic__`
+
+```python
+x: dict = ...
+x.__len__()
+```
+
+Python bypasses magic methods for performance
+
+## and many more!
+
+- assigned lambdas
+- methods that should be funcs or staticmethods
+- methods that should be properties
+- overwriting builtins
+- not leveraging object structures for iteration (eg `.items()`)
+  etc...

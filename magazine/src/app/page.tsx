@@ -9,7 +9,7 @@ export default function Home() {
       <div className="u-Container content">
         <ul className="u-Grid column">
           <ArticleBlockLarge
-            href="/blog/test"
+            href="/blog/hidden_state_machines"
             image_src="/finite_state_machine.jpg"
             image_alt="Picture of the author"
             title="Machine Learning Models as Finite State Machines"
@@ -23,7 +23,7 @@ export default function Home() {
             paragraph="Caching from functools to Redis, and everything in between."
           />
           <ArticleBlockHalf
-            href="/blog/test"
+            href="/blog/annoying_python_patterns"
             image_src="/complex_snakes.png"
             image_alt="Picture of the author"
             title="Annoying Python Patterns"
