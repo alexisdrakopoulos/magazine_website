@@ -19,7 +19,7 @@ function AboutLayout() {
                 <h3 className="t-TitleSans title">About Me</h3>
               </div>
               <div className="t-BodySerif intro">
-                Hi! I'm an ML Engineer passionate about writing clean
+                Hi! I&apos;m an ML Engineer passionate about writing clean
                 maintainable code. My interests range from low latency/high
                 performance systems to higher level theory such as system
                 design. I also like various areas of applied mathematics such as
