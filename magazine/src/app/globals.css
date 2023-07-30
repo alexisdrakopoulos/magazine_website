@@ -440,7 +440,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  padding-bottom:40px
+  padding-bottom:50px
 }
 
 @media (min-width: 670px) {
@@ -454,23 +454,15 @@ a {
   position: absolute;
   z-index: 20;
   left: 50%;
-  top: 50%;
-  width: 120px;
+  top: 72%;
+  width: 200px;
   transform:translate(-50%, -50%)
 }
 
-
-@media (max-width: 880px) {
-  .PageNav {
-    /* increase height on mobile views */
-    height: 140px; 
-  }
-
+@media (min-width: 880px) {
   .PageNav .logo {
-    /* adjust top property to position logo under nav list */
-    top: 100%; 
-    width:60px;
-    left: 25%;
+      width:220px;
+      top:60%;
   }
 }
 
@@ -482,7 +474,6 @@ a {
   left: 45%;
   right: 45%;
   height: 40%;
-  /* background: #f2f2f2; */
   transform: skewY(-12deg);
   pointer-events:none
 }

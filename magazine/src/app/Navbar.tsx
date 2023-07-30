@@ -11,8 +11,10 @@ export default function Navbar() {
               <Image
                 src="/temporary_logo.svg"
                 alt="minorversion"
-                width={300}
-                height={60}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }} // optional
               ></Image>
             </a>
           </h1>
