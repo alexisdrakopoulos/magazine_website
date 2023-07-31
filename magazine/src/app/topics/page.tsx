@@ -2,17 +2,30 @@ import Image from "next/image";
 import TopicBlock from "../../components/simpler_topic_list";
 
 function TopicsLayout2() {
-  const python_topics = ["Topic 1", "Topic 2", "Topic 3"];
-  const python_topics2 = [
-    "Topic 1",
-    "Topic 2",
-    "Topic 3",
-    "Topic 4",
-    "Topic 5",
+  const python_main = ["General Topics", "Libraries", "Scientific Computing"];
+  const python_extra = [
+    "Tips & Tricks",
+    "Low Level Python",
+    "Design Patterns",
+    "High Performance",
+    "Testing",
   ];
-  const software_engineering_topics = ["Topic 1", "Topic 2", "Topic 3"];
-  const linear_algebra_topics = ["Topic 1", "Topic 2", "Topic 3"];
-  const stochastic_topics = ["Topic 1", "Topic 2", "Topic 3"];
+  const compsci_main = ["Languages", "OOP"];
+  const compsci_extra = [
+    "Functional",
+    "System Design",
+    "Concurrency",
+    "Algorithms",
+    "Career & Life",
+  ];
+  const mathematics_main = ["Linear Algebra", "Statistical Learning"];
+  const mathematics_extra = [
+    "Optimization",
+    "Iterative Methods",
+    "Deep Learning",
+    "Monte Carlo",
+    "Simulations",
+  ];
 
   return (
     <div className="ArticlePage">
@@ -22,23 +35,23 @@ function TopicsLayout2() {
             <div className="article-grid topic-dropshadow">
               <div className="image small-art">
                 <Image
-                  src="/python_snake.jpg"
+                  src="/career_surreal.png"
                   alt="alexis drakopoulos profile"
-                  width={300}
-                  height={300}
-                  style={{ borderRadius: "50%", paddingBottom: "15px" }}
+                  width={400}
+                  height={400}
+                  style={{ borderRadius: "50%" }}
                 ></Image>
               </div>
-              <div className="u-Grid TopicGrid">
+              <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
                 <div className="text">
                   <TopicBlock
                     href="/topics"
-                    title="Python"
-                    topics={python_topics}
+                    title="Software Engineering"
+                    topics={compsci_main}
                   />
                 </div>
                 <div className="text">
-                  <TopicBlock href="/topics" topics={python_topics2} />
+                  <TopicBlock href="/topics" topics={compsci_extra} />
                 </div>
               </div>
             </div>
@@ -48,23 +61,49 @@ function TopicsLayout2() {
             <div className="article-grid topic-dropshadow">
               <div className="image small-art">
                 <Image
-                  src="/phone_snake.jpg"
+                  src="/code_picture.png"
                   alt="abstract math dali style"
-                  width={300}
-                  height={300}
-                  style={{ borderRadius: "50%", paddingBottom: "15px" }}
+                  width={400}
+                  height={400}
+                  style={{ borderRadius: "50%" }}
                 ></Image>
               </div>
-              <div className="u-Grid TopicGrid">
+              <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
                 <div className="text">
                   <TopicBlock
                     href="/topics"
                     title="Python"
-                    topics={python_topics}
+                    topics={python_main}
                   />
                 </div>
                 <div className="text">
-                  <TopicBlock href="/topics" topics={python_topics2} />
+                  <TopicBlock href="/topics" topics={python_extra} />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li className="ArticleBlock large">
+            <div className="article-grid topic-dropshadow">
+              <div className="image small-art">
+                <Image
+                  src="/surreal_math.png"
+                  alt="alexis drakopoulos profile"
+                  width={400}
+                  height={400}
+                  style={{ borderRadius: "50%" }}
+                ></Image>
+              </div>
+              <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
+                <div className="text">
+                  <TopicBlock
+                    href="/topics"
+                    title="Applied Mathematics"
+                    topics={mathematics_main}
+                  />
+                </div>
+                <div className="text">
+                  <TopicBlock href="/topics" topics={mathematics_extra} />
                 </div>
               </div>
             </div>
