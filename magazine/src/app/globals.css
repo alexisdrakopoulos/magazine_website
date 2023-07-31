@@ -1196,6 +1196,15 @@ a {
       grid-column:span 2
   }
 
+  .u-Grid.TopicGrid {
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .TopicBlock {
+    padding: 50px 0 50px;
+    grid-column: span 1;
+  }
+
   .ArticleBlock:not(.large) .art, .ArticleBlock:not(.large) .tinyArt {
       padding-top:56.25%
   }
@@ -1227,6 +1236,12 @@ a {
 }
 
 .ArticleBlock > a:hover .head:before {
+  transition-duration: .2s;
+  transform: scaleX(1);
+  background:#000
+}
+
+.ArticleBlock > .topic-dropshadow:hover .head:before {
   transition-duration: .2s;
   transform: scaleX(1);
   background:#000
@@ -3036,3 +3051,38 @@ button:active {
   top:.125em;
   position:relative
   }
+
+  /* CSS for the topic list */
+
+  .topic-dropshadow {
+    transition-property: box-shadow, color;
+    transition-duration:.15s
+  }
+
+  ul > li > a:hover .u-Arrow {
+    color:#000000
+  }
+  
+  ul > li > a > .u-Arrow {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  ul > li > a > .u-Arrow::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ArticleBlock.TopicBlock .text .title {
+    padding: 7px;
+  }
+
+.ArticleBlock.TopicBlock .text .title:hover {
+  box-shadow: inset 0 0 0 2.5px currentColor;
+  /* increase size of box shadow */
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
