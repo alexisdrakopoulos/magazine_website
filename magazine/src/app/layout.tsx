@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import NavBar from "./Navbar";
 import Script from "next/script";
-import { GoogleAnalytics } from "nextjs-google-analytics";
 
 // import Font Awesome CSS
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -23,8 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleAnalytics trackPageViews gaMeasurementId="G-WPDR9K3CYN" />
-      {/* <Script
+      <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-WPDR9K3CYN"
         strategy="afterInteractive"
       />
@@ -36,7 +34,7 @@ export default function RootLayout({
  
           gtag('config', 'G-WPDR9K3CYN');
         `}
-      </Script> */}
+      </Script>
       <body>
         <NavBar />
         {children}
