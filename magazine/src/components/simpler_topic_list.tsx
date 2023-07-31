@@ -37,7 +37,7 @@ const TopicBlock: React.FC<TopicProps> = ({ href, title, topics }) => (
               >
                 <h3
                   className="t-TitleSans title"
-                  style={{ margin: "0px", padding: "10px" }}
+                  style={{ margin: "0px", padding: "10px", color: "#000000" }}
                 >
                   {topic}
                 </h3>

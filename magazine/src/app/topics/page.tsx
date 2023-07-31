@@ -1,7 +1,7 @@
 import Image from "next/image";
 import TopicBlock from "../../components/simpler_topic_list";
 
-function TopicsLayout2() {
+function TopicsLayout() {
   const python_main = ["General Topics", "Libraries", "Scientific Computing"];
   const python_extra = [
     "Tips & Tricks",
@@ -33,24 +33,24 @@ function TopicsLayout2() {
         <ul className="u-Grid column">
           <li className="ArticleBlock large">
             <div className="article-grid topic-dropshadow">
-              <div className="image small-art">
+              <div className="image small-art topic-art-size">
                 <Image
                   src="/career_surreal.png"
                   alt="alexis drakopoulos profile"
                   width={400}
                   height={400}
-                  style={{ borderRadius: "50%" }}
+                  className="topic-art-size"
                 ></Image>
               </div>
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
-                <div className="text">
+                <div>
                   <TopicBlock
                     href="/topics"
                     title="Software Engineering"
                     topics={compsci_main}
                   />
                 </div>
-                <div className="text">
+                <div>
                   <TopicBlock href="/topics" topics={compsci_extra} />
                 </div>
               </div>
@@ -59,24 +59,24 @@ function TopicsLayout2() {
 
           <li className="ArticleBlock large flipped">
             <div className="article-grid topic-dropshadow">
-              <div className="image small-art">
+              <div className="image small-art topic-art-size">
                 <Image
                   src="/code_picture.png"
                   alt="abstract math dali style"
                   width={400}
                   height={400}
-                  style={{ borderRadius: "50%" }}
+                  className="topic-art-size"
                 ></Image>
               </div>
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
-                <div className="text">
+                <div>
                   <TopicBlock
                     href="/topics"
                     title="Python"
                     topics={python_main}
                   />
                 </div>
-                <div className="text">
+                <div>
                   <TopicBlock href="/topics" topics={python_extra} />
                 </div>
               </div>
@@ -85,24 +85,24 @@ function TopicsLayout2() {
 
           <li className="ArticleBlock large">
             <div className="article-grid topic-dropshadow">
-              <div className="image small-art">
+              <div className="image small-art topic-art-size">
                 <Image
                   src="/surreal_math.png"
                   alt="alexis drakopoulos profile"
                   width={400}
                   height={400}
-                  style={{ borderRadius: "50%" }}
+                  className="topic-art-size"
                 ></Image>
               </div>
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
-                <div className="text">
+                <div>
                   <TopicBlock
                     href="/topics"
                     title="Applied Mathematics"
                     topics={mathematics_main}
                   />
                 </div>
-                <div className="text">
+                <div>
                   <TopicBlock href="/topics" topics={mathematics_extra} />
                 </div>
               </div>
@@ -114,4 +114,4 @@ function TopicsLayout2() {
   );
 }
 
-export default TopicsLayout2;
+export default TopicsLayout;
