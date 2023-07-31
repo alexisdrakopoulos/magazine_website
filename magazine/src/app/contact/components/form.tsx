@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const Form = () => {
   const [isMessageSent, setMessageSent] = useState<boolean>(false);
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -106,6 +108,7 @@ export const Form = () => {
         <button type="submit">Send Message</button>
       </form>
       {isMessageSent && <p> Message has been Sent</p>}
+      {isMessageSent && router.push("/contact/success")}
     </>
   );
 };

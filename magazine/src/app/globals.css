@@ -2947,6 +2947,12 @@ input, textarea {
   margin-top: 5px;
 }
 
+@media (max-width: 864px) {
+  input, textarea {
+    min-width: 300px;
+  }
+}
+
 textarea {
   min-height: 150px
 }
