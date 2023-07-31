@@ -23,6 +23,7 @@
     "gray-matter": "^4.0.3",
     "next": "13.4.12",
     "next-contentlayer": "^0.3.4",
+    "nextjs-google-analytics": "^2.3.3",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^9.1.0",
     "react": "18.2.0",
@@ -34,7 +35,5 @@
     "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.2",
     "typescript": "5.1.6"
-  },
-  "devDependencies": {
   }
 }
