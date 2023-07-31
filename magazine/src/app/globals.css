@@ -1338,7 +1338,7 @@ a {
       grid-column:1/-1
   }
 
-  .ArticleBlock.large > a {
+  .ArticleBlock.large > .article-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 100px 6.66667%;
@@ -1348,6 +1348,14 @@ a {
   .ArticleBlock.large .art {
       grid-column-end:span 2
   }
+
+  .ArticleBlock.large .large-text {
+    grid-column-start:span 2
+}
+
+  .ArticleBlock.large .small-art {
+    grid-column-end:span 1
+}
 
   .ArticleBlock.large .text {
       display: flex;
@@ -1361,6 +1369,15 @@ a {
   .ArticleBlock.large.flipped .art {
       grid-column-start:2
   }
+
+  .ArticleBlock.large.flipped .small-art {
+    grid-column-start:3
+}
+
+  .ArticleBlock.large.flipped .large-text {
+    grid-column-end:span 2;
+}
+
 }
 
 .ContentBody .clear {

@@ -18,7 +18,7 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
   paragraph,
 }) => (
   <li className="ArticleBlock large">
-    <Link href={href}>
+    <Link href={href} className="article-grid">
       <div className="u-Art art">
         <Image
           src={image_src}
