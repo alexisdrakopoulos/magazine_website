@@ -24,10 +24,9 @@ function AboutLayout() {
                   Hi! I&apos;m an ML Engineer passionate about writing clean
                   maintainable code. My interests range from low latency/high
                   performance systems to higher level theory such as system
-                  design. I also like various areas of applied mathematics such
-                  as statistical learning & probabilistic programming. I enjoy
-                  working in fast-paced high impact teams working on interesting
-                  technical problems.
+                  design. I also have an interest in various areas of applied
+                  mathematics such as statistical learning & probabilistic
+                  programming. Feel free to reach out through the contact form!
                 </div>
               </div>
             </div>
