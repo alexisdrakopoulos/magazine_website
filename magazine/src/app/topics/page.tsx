@@ -45,13 +45,16 @@ function TopicsLayout() {
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
                 <div>
                   <TopicBlock
-                    href="/topics"
+                    href="/topics/software-engineering"
                     title="Software Engineering"
                     topics={compsci_main}
                   />
                 </div>
                 <div>
-                  <TopicBlock href="/topics" topics={compsci_extra} />
+                  <TopicBlock
+                    href="/topics/software-engineering"
+                    topics={compsci_extra}
+                  />
                 </div>
               </div>
             </div>
@@ -71,13 +74,13 @@ function TopicsLayout() {
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
                 <div>
                   <TopicBlock
-                    href="/topics"
+                    href="/topics/python"
                     title="Python"
                     topics={python_main}
                   />
                 </div>
                 <div>
-                  <TopicBlock href="/topics" topics={python_extra} />
+                  <TopicBlock href="/topics/python" topics={python_extra} />
                 </div>
               </div>
             </div>
@@ -97,13 +100,16 @@ function TopicsLayout() {
               <div className="u-Grid TopicGrid" style={{ paddingTop: "50px" }}>
                 <div>
                   <TopicBlock
-                    href="/topics"
+                    href="/topics/applied-mathematics"
                     title="Applied Mathematics"
                     topics={mathematics_main}
                   />
                 </div>
                 <div>
-                  <TopicBlock href="/topics" topics={mathematics_extra} />
+                  <TopicBlock
+                    href="/topics/applied-mathematics"
+                    topics={mathematics_extra}
+                  />
                 </div>
               </div>
             </div>

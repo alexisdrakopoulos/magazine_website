@@ -26,6 +26,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
     intro: post.intro,
     date: post.date,
     image: post.image,
+    topics: post.topics,
   };
 };
 
