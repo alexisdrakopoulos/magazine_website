@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type ArticleBlockLargeProps = {
-  href: string;
+  href?: string;
   image_src: string;
   image_alt: string;
   title: string;
@@ -16,9 +16,9 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
   image_alt,
   title,
   paragraph,
-}) => (
-  <li className="ArticleBlock large">
-    <Link href={href} className="article-grid">
+}) => {
+  const content = (
+    <>
       <div className="u-Art art">
         <Image
           src={image_src}
@@ -29,12 +29,17 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
             width: "100%",
             height: "auto",
             paddingBottom: "3px",
+            verticalAlign: "bottom",
+            display: "inline-block",
           }} // optional
           alt={image_alt}
           unoptimized
         />
       </div>
-      <div className="text">
+      <div
+        className="text"
+        style={{ verticalAlign: "bottom", display: "inline-block" }}
+      >
         <div className="head">
           <h3
             className="t-TitleSerif large title"
@@ -45,8 +50,20 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
         </div>
         <div className="t-BodySans large intro">{paragraph}</div>
       </div>
-    </Link>
-  </li>
-);
+    </>
+  );
+
+  return (
+    <li className="ArticleBlock large">
+      {href ? (
+        <Link href={href} className="article-grid">
+          {content}
+        </Link>
+      ) : (
+        <div className="article-grid">{content}</div>
+      )}
+    </li>
+  );
+};
 
 export default ArticleBlockLarge;
