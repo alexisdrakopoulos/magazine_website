@@ -26,7 +26,7 @@ const TopicBlock: React.FC<TopicProps> = ({ href, title, topics }) => (
           index // map through topics array and display each topic
         ) => (
           <li key={index}>
-            <Link href="/">
+            <Link href={href}>
               <div
                 className="IssueTitle tiny u-Arrow right"
                 style={{
