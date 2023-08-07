@@ -2,12 +2,14 @@ import styles from "./page.module.css";
 import ArticleBlockLarge from "../components/article_block_large";
 import ArticleBlockHalf from "../components/article_block_half";
 import ArticleBlock from "../components/article_block";
+import Topbar from "../components/top_bar";
 
 export default function Home() {
   return (
     <div className="IssuePage">
       <div className="u-Container content">
         <ul className="u-Grid column">
+          <Topbar />
           <ArticleBlockLarge
             href="/blog/hidden_state_machines"
             image_src="/finite_state_machine.jpg"
