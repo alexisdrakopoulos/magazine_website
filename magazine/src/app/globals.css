@@ -3119,3 +3119,15 @@ button:active {
     font-size: 32px;
   }
 }
+
+/* underline */
+
+.underline {
+    padding-bottom: .2%;
+    transition: background-size .6s ease-out;
+    background: linear-gradient(#3dffb8, #3dffb8) no-repeat left 123%/0 40%
+}
+
+.underline:hover {
+    background-size:97% 40%
+}
