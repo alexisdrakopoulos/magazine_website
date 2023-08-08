@@ -21,31 +21,44 @@ export default function Navbar() {
                   width={0}
                   height={0}
                   sizes="100vw"
+                  className="underline"
                   style={{
                     width: "100%",
                     height: "auto",
-                    paddingBottom: "3px",
+                    paddingBottom: "8px",
                   }} // optional
                 ></Image>
               </Link>
             </li>
             <li>
               <Link href="/topics">
-                <span className={["nav-item", trispace.className].join(" ")}>
+                <span
+                  className={["nav-item", "underline", trispace.className].join(
+                    " "
+                  )}
+                >
                   Topics
                 </span>
               </Link>
             </li>
             <li>
               <Link href="/about">
-                <span className={["nav-item", trispace.className].join(" ")}>
+                <span
+                  className={["nav-item", "underline", trispace.className].join(
+                    " "
+                  )}
+                >
                   About
                 </span>
               </Link>
             </li>
             <li>
               <Link href="/contact">
-                <span className={["nav-item", trispace.className].join(" ")}>
+                <span
+                  className={["nav-item", "underline", trispace.className].join(
+                    " "
+                  )}
+                >
                   Contact
                 </span>
               </Link>

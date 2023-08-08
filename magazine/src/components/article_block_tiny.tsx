@@ -24,8 +24,11 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
   <div
     className="tiny"
     style={{
-      marginRight: "25px",
+      paddingRight: "25px",
       marginBottom: "30px",
+      display: "inline-block",
+      position: "relative",
+      //   alignSelf: "flex-end",
     }}
   >
     <div className="text" style={{ marginTop: "0" }}>
@@ -37,10 +40,13 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
           {title}
         </h3>
       </Link>
-      <div className="t-BodySerif small intro" style={{ marginTop: "16px" }}>
+      <div
+        className="t-BodySerif small intro"
+        style={{ paddingTop: "16px", paddingBottom: "16px" }}
+      >
         {truncate(paragraph, 120)}
       </div>
-      <div style={{ marginTop: "16px" }}>
+      <div style={{ bottom: "0", position: "absolute" }}>
         <StringsWithHashtags strings={topics} />
       </div>
     </div>

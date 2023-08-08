@@ -1,10 +1,21 @@
 import React from "react";
+import Link from "next/link";
 
 const StringsWithHashtags: React.FC<{ strings: string[] }> = ({ strings }) => {
-  // Join the array into a single string, placing a hashtag before each word and a space after
-  const stringWithHashtags = strings.map((str) => `#${str}`).join(" ");
-
-  return <div>{stringWithHashtags}</div>;
+  return (
+    <div>
+      {strings.map((str, index) => (
+        <Link
+          key={index}
+          href={`/topics/${str}`}
+          style={{ marginRight: "10px" }}
+          className="green_hover"
+        >
+          #{str}
+        </Link>
+      ))}
+    </div>
+  );
 };
 
 export default StringsWithHashtags;

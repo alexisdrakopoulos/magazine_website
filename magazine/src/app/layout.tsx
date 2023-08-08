@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import NavBar from "./Navbar";
+import NavBar from "../components/Navbar";
 import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/google_analytics";

@@ -1,11 +1,13 @@
 body{
   --issueColor:#4d79cc;
+  --greenColor: #3afcac;
   color: var(--issueColor);
 
-}::-moz-selection{background:rgba(76,112,177,.4);color:#000}::selection{
-  background: rgba(76,112,177,.4);
+}
+::-moz-selection{background:var(--greenColor);color:#000}
+::selection{
+  background: var(--greenColor);
   color: #000;
-
 }
 
 blockquote, body, dd, dl, figure, h1, h2, h3, h4, h5, h6, img, ol, p, pre, ul {
@@ -560,18 +562,10 @@ a {
 }
 
 .PageNav .nav a span {
-  transition: box-shadow .15s;
   display: inline-block;
   padding:5px 0
 }
 
-.PageNav .nav a:hover span {
-  box-shadow:0 1.5px 0 #000
-}
-
-.PageNav .nav a:hover img {
-  box-shadow:0 1.5px 0 #000
-}
 
 .SubscribeBox {
   --input-size: 52px;
@@ -3125,9 +3119,13 @@ button:active {
 .underline {
     padding-bottom: .2%;
     transition: background-size .6s ease-out;
-    background: linear-gradient(#3dffb8, #3dffb8) no-repeat left 123%/0 40%
+    background: linear-gradient(var(--greenColor), var(--greenColor)) no-repeat left 123%/0 40%
 }
 
 .underline:hover {
     background-size:97% 40%
+}
+
+.green_hover:hover {
+    background-color: var(--greenColor);
 }

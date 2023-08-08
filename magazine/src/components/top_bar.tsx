@@ -17,7 +17,7 @@ export default function Topbar() {
       <div
         style={{
           gridColumnEnd: "span 2",
-          borderTop: "4px solid #3dffb8",
+          borderTop: "4px solid var(--greenColor)",
         }}
       >
         <h4
@@ -28,14 +28,24 @@ export default function Topbar() {
             transform: "translateY(-120%)",
           }}
         >
-          <span style={{ backgroundColor: "#3dffb8" }}>Announcements</span>
+          <span style={{ backgroundColor: "var(--greenColor)", color: "#000" }}>
+            Announcements
+          </span>
         </h4>
-        <div>text test testing this text is here oh here</div>
+        <div style={{ display: "flex", height: "100%", minWidth: "250px" }}>
+          <ArticleBlockTiny
+            href={"/"} // Or you may want to set the href based on something in your Post data
+            title="Test Announcement is here"
+            paragraph="test intro"
+            topics={["test1", "test2"]}
+            document_type="test3"
+          />
+        </div>
       </div>
       <div
         style={{
           gridColumnStart: "span 2",
-          borderTop: "4px solid #3dffb8",
+          borderTop: "4px solid var(--greenColor)",
           marginLeft: "40px",
         }}
       >
@@ -47,9 +57,16 @@ export default function Topbar() {
             transform: "translateY(-120%)",
           }}
         >
-          <span style={{ backgroundColor: "#3dffb8" }}>Recent Posts</span>
+          <span
+            style={{
+              backgroundColor: "var(--greenColor)",
+              color: "#000",
+            }}
+          >
+            Recent Posts
+          </span>
         </h4>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <div style={{ display: "flex", height: "100%" }}>
           {sortedPosts.map((post, index) => (
             <ArticleBlockTiny
               key={index}
