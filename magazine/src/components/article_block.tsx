@@ -1,27 +1,45 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import StringsWithHashtags from "./hashtag_strings";
 
 type ArticleBlockProps = {
   href: string;
   title: string;
   paragraph: string;
+  topics?: string[];
+  document_type?: string;
 };
 
 const ArticleBlock: React.FC<ArticleBlockProps> = ({
   href,
   title,
   paragraph,
+  topics,
+  document_type,
 }) => (
   <li className="ArticleBlock">
-    <Link href={href}>
-      <div className="text">
-        <div className="head">
-          <h3 className=" t-TitleSans title">{title}</h3>
+    <div className="FormatBlock">
+      <div className="text" style={{ marginTop: 0 }}>
+        <Link href={href}>
+          <h3
+            className=" t-TitleSans title underline"
+            style={{ display: "inline" }}
+          >
+            {title}
+          </h3>
+        </Link>
+        <div className="t-BodySerif small intro" style={{ paddingTop: "10px" }}>
+          {paragraph}
         </div>
-        <div className="t-BodySerif small intro">{paragraph}</div>
+        {topics ? (
+          <div style={{ paddingTop: "20px" }}>
+            <StringsWithHashtags strings={topics} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-    </Link>
+    </div>
   </li>
 );
 

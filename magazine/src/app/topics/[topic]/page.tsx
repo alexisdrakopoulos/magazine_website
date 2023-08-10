@@ -51,6 +51,8 @@ interface TopicBannerProp {
   image_alt: string;
   title: string;
   paragraph: string;
+  topics: string[];
+  document_type: string;
 }
 
 interface TopicProp {
@@ -59,6 +61,8 @@ interface TopicProp {
   image_alt: string;
   title: string;
   paragraph: string;
+  topics?: string[];
+  document_type: string;
 }
 
 interface TopicLayoutProps {

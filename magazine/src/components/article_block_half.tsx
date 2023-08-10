@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import StringsWithHashtags from "./hashtag_strings";
 
 type ArticleBlockHalfProps = {
   href: string;
@@ -8,6 +9,8 @@ type ArticleBlockHalfProps = {
   image_alt: string;
   title: string;
   paragraph: string;
+  topics?: string[];
+  document_type?: string;
 };
 
 const ArticleBlockHalf: React.FC<ArticleBlockHalfProps> = ({
@@ -16,19 +19,37 @@ const ArticleBlockHalf: React.FC<ArticleBlockHalfProps> = ({
   image_alt,
   title,
   paragraph,
+  topics,
+  document_type,
 }) => (
   <li className="ArticleBlock half">
-    <Link href={href}>
+    <div className="FormatBlock">
       <div className="u-Art art">
         <Image src={image_src} width={500} height={500} alt={image_alt} />
       </div>
       <div className="text">
-        <div className="head">
-          <h3 className=" t-TitleSans title">{title}</h3>
+        <Link href={href}>
+          <div className="head">
+            <h3
+              className=" t-TitleSans title underline"
+              style={{ display: "inline" }}
+            >
+              {title}
+            </h3>
+          </div>
+        </Link>
+        <div className="t-BodySerif small intro" style={{ paddingTop: "10px" }}>
+          {paragraph}
         </div>
-        <div className="t-BodySerif small intro">{paragraph}</div>
+        {topics ? (
+          <div style={{ paddingTop: "20px" }}>
+            <StringsWithHashtags strings={topics} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-    </Link>
+    </div>
   </li>
 );
 

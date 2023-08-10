@@ -1228,12 +1228,12 @@ a {
   }
 }
 
-.ArticleBlock > a {
+.ArticleBlock > .FormatBlock {
   display: block;
   width:100%
 }
 
-.ArticleBlock > a:hover .head:before {
+.ArticleBlock > .FormatBlock:hover .head:before {
   transition-duration: .2s;
   transform: scaleX(1);
   background:#000

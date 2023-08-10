@@ -34,7 +34,7 @@ export default function Topbar() {
         </h4>
         <div style={{ display: "flex", height: "100%", minWidth: "250px" }}>
           <ArticleBlockTiny
-            href={"/"} // Or you may want to set the href based on something in your Post data
+            href="/" // Or you may want to set the href based on something in your Post data
             title="Test Announcement is here"
             paragraph="test intro"
             topics={["test1", "test2"]}

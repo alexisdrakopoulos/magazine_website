@@ -16,6 +16,8 @@ export default function Home() {
             image_alt="Picture of the author"
             title="Machine Learning Models as Finite State Machines"
             paragraph="Are ML Models in modern OOP toolkits finite state machines? My goal is not to convince you that this has some deeper implication, but rather to discuss the resulting design implications and review the current approaches in many OSS libraries."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
           <ArticleBlockHalf
             href="/blog/python_caching_overview"
@@ -23,6 +25,8 @@ export default function Home() {
             image_alt="Picture of the author"
             title="Python Caching Overview"
             paragraph="Caching from functools to Redis, and everything in between."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
           <ArticleBlockHalf
             href="/blog/annoying_python_patterns"
@@ -30,21 +34,29 @@ export default function Home() {
             image_alt="Picture of the author"
             title="Annoying Python Patterns"
             paragraph="We look beyond spaghetti code and nasty one liners, and discuss commonly found patterns which range from unaesthetic to outright dangerous."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
           <ArticleBlock
             href="/blog/test"
             title="Reframing tech debt"
             paragraph="On reimagining planning as a dynamic and generative process."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
           <ArticleBlock
             href="/blog/test"
             title="Reframing tech debt"
             paragraph="On reimagining planning as a dynamic and generative process."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
           <ArticleBlock
             href="/blog/test"
             title="Reframing tech debt"
             paragraph="On reimagining planning as a dynamic and generative process."
+            topics={["Machine Learning", "Python"]}
+            document_type="blog"
           />
         </ul>
       </div>

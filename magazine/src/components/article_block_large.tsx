@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import StringsWithHashtags from "./hashtag_strings";
 
 type ArticleBlockLargeProps = {
   href?: string;
@@ -8,6 +9,8 @@ type ArticleBlockLargeProps = {
   image_alt: string;
   title: string;
   paragraph: string;
+  topics?: string[];
+  document_type?: string;
 };
 
 const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
@@ -16,6 +19,8 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
   image_alt,
   title,
   paragraph,
+  topics,
+  document_type,
 }) => {
   const content = (
     <>
@@ -38,30 +43,37 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
       </div>
       <div
         className="text"
-        style={{ verticalAlign: "bottom", display: "inline-block" }}
+        style={{
+          verticalAlign: "bottom",
+          display: "inline-block",
+          paddingTop: 0,
+          marginTop: 0,
+        }}
       >
-        <div className="head">
-          <h3
-            className="t-TitleSerif large title"
-            // style={{ maxWidth: "400px" }} // NOT SURE WHY WE WANT THIS?
-          >
-            {title}
-          </h3>
+        <h3
+          className="t-TitleSerif large title underline"
+          style={{ display: "inline" }}
+          // style={{ maxWidth: "400px" }} // NOT SURE WHY WE WANT THIS?
+        >
+          {href ? <Link href={href}>{title}</Link> : <>{title}</>}
+        </h3>
+        <div className="t-BodySans large intro" style={{ paddingTop: "25px" }}>
+          {paragraph}
         </div>
-        <div className="t-BodySans large intro">{paragraph}</div>
+        {topics ? (
+          <div style={{ paddingTop: "20px" }}>
+            <StringsWithHashtags strings={topics} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
 
   return (
     <li className="ArticleBlock large">
-      {href ? (
-        <Link href={href} className="article-grid">
-          {content}
-        </Link>
-      ) : (
-        <div className="article-grid">{content}</div>
-      )}
+      <div className="article-grid">{content}</div>
     </li>
   );
 };
