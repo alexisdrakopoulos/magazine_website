@@ -22,12 +22,14 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
   document_type,
 }) => (
   <div
-    className="tiny"
+    className="ArticleBlock tiny"
     style={{
+      flex: 1,
       paddingRight: "25px",
       marginBottom: "30px",
       display: "inline-block",
       position: "relative",
+      minWidth: "250px",
       //   alignSelf: "flex-end",
     }}
   >

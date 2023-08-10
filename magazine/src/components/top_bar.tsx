@@ -12,12 +12,19 @@ export default function Topbar() {
   return (
     <li
       className="ArticleBlock large"
-      style={{ paddingBottom: "30px", paddingTop: "60px" }}
+      style={{
+        paddingBottom: "30px",
+        paddingTop: "60px",
+        flexWrap: "wrap",
+        gap: "30px",
+      }}
     >
       <div
         style={{
-          gridColumnEnd: "span 2",
           borderTop: "4px solid var(--greenColor)",
+          flex: 1,
+          display: "inline-block",
+          position: "relative",
         }}
       >
         <h4
@@ -44,9 +51,8 @@ export default function Topbar() {
       </div>
       <div
         style={{
-          gridColumnStart: "span 2",
           borderTop: "4px solid var(--greenColor)",
-          marginLeft: "40px",
+          flex: 3,
         }}
       >
         <h4
@@ -66,7 +72,13 @@ export default function Topbar() {
             Recent Posts
           </span>
         </h4>
-        <div style={{ display: "flex", height: "100%" }}>
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            flexWrap: "wrap",
+          }}
+        >
           {sortedPosts.map((post, index) => (
             <ArticleBlockTiny
               key={index}
