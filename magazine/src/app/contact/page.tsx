@@ -1,5 +1,11 @@
 import React from "react";
 import { Form } from "./components/form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Send MinorVersion an email!",
+};
 
 export default function Contact() {
   return (

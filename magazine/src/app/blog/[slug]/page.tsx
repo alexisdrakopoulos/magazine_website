@@ -23,9 +23,8 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
   return {
     title: post.title,
-    intro: post.intro,
+    description: post.intro,
     date: post.date,
-    image: post.image,
     topics: post.topics,
   };
 };

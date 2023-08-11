@@ -1,4 +1,10 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About MinorVersion",
+  description: "Learn more about MinorVersion and me (Alexis Drakopoulos)",
+};
 
 function AboutLayout() {
   return (

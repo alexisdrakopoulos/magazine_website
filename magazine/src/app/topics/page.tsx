@@ -1,6 +1,13 @@
 import Image from "next/image";
 import TopicBlock from "../../components/simpler_topic_list";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MinorVersion Topics",
+  description: "List of the different Topics present on MinorVersion",
+};
+
 function TopicsLayout() {
   const python_main = ["General Topics", "Libraries", "Scientific Computing"];
   const python_extra = [
