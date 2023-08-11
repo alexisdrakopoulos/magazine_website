@@ -38,7 +38,6 @@ const ArticleBlockLarge: React.FC<ArticleBlockLargeProps> = ({
             display: "inline-block",
           }} // optional
           alt={image_alt}
-          unoptimized
         />
       </div>
       <div

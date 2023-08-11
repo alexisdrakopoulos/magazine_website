@@ -31,7 +31,6 @@ export default function Contact() {
                     paddingTop: "50px",
                   }} // optional
                   alt="successful contact"
-                  unoptimized
                 />
               </div>
             </div>

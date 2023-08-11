@@ -33,7 +33,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 const ImageComponent = ({ src, alt }: { src: string; alt: string }) => (
   <div className="u-Container art">
     <div className="u-Art">
-      <Image src={src} width={500} height={500} alt={alt} unoptimized></Image>
+      <Image src={src} width={500} height={500} alt={alt}></Image>
     </div>
   </div>
 );
