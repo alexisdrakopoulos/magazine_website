@@ -51,8 +51,8 @@ interface TopicBannerProp {
   image_alt: string;
   title: string;
   paragraph: string;
-  topics: string[];
-  document_type: string;
+  topics?: string[];
+  document_type?: string;
 }
 
 interface TopicProp {
@@ -108,6 +108,8 @@ export default function Page({ params }: { params: { topic: string } }) {
     image_alt: "TEMPORARY",
     title: post.title,
     paragraph: post.intro,
+    topics: post.topics,
+    document_type: post.document_type,
   }));
 
   return (
