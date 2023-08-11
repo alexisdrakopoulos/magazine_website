@@ -3140,6 +3140,10 @@ button:active {
   padding-right: 25px; /* Space for the icon on the right */
 }
 
+h1 > .subheading-anchor {
+  padding-right: 35px;
+}
+
 .subheading-anchor:hover::before {
   content: '#'; /* Font Awesome's Unicode value for the hashtag */
   position: absolute;
