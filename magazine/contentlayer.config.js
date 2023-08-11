@@ -46,7 +46,7 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          theme: "github-dark",
+          theme: "monokai",
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
@@ -68,7 +68,9 @@ export default makeSource({
           properties: {
             className: ["subheading-anchor"],
             ariaLabel: "Link to section",
+            
           },
+          behavior: "wrap",
         },
       ],
     ],

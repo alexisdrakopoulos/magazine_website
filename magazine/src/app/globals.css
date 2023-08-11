@@ -1452,7 +1452,8 @@ a {
 }
 
 .ContentBody p {
-  margin:20px 0
+  margin:10px 0;
+  line-height:1.75;
 }
 
 .ContentBody h2 em, .ContentBody h3 em, .ContentBody h4 em {
@@ -1466,7 +1467,7 @@ a {
 
 .ContentBody h2 {
   margin: -20px 0 20px;
-  padding-top: 80px;
+  padding-top: 40px;
   font: 400 30px/1.2 brandon-grotesque, sans-serif;
   letter-spacing:-.015em
 }
@@ -1531,11 +1532,11 @@ a {
 
 .ContentBody pre {
   position: relative;
-  margin: 40px 0;
+  margin: 20px 0;
   padding: 20px 30px 20px 60px;
   overflow: hidden;
   overflow-x: auto;
-  font-size: 90%;
+  font-size: 75%;
   line-height: 1.65;
   background:#fff
 }
@@ -3128,3 +3129,22 @@ button:active {
 .green_hover:hover {
     background-color: var(--greenColor);
 }
+
+/* CSS for blog pages fontawesome icon */
+
+.subheading-anchor {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: inline-block; /* This helps to maintain structure when adding pseudo-elements */
+  padding-right: 25px; /* Space for the icon on the right */
+}
+
+.subheading-anchor:hover::before {
+  content: '#'; /* Font Awesome's Unicode value for the hashtag */
+  position: absolute;
+  right: 0; /* Place it on the far right edge of the padding */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
