@@ -28,6 +28,7 @@ export const Post = defineDocumentType(() => ({
     topics: {type: 'list', of: { type: 'string' }, required: false, default: []},
     subtopics: {type: 'list', of: { type: 'string' }, required: false, default: []},
     document_type: {type: 'string', required: true},
+    document_level: {type: 'string', required: false},
   },
   // computedFields: {
   //   url: { type: 'string', resolve: (post) => `/posts/${post._raw.flattenedPath}` },

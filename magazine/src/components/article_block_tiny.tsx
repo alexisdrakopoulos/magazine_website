@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import StringsWithHashtags from "./hashtag_strings";
+import ArticleLevel from "./article_level";
 
 type ArticleBlockProps = {
   href: string;
@@ -8,6 +9,7 @@ type ArticleBlockProps = {
   paragraph: string;
   topics: string[];
   document_type: string;
+  document_level?: string;
 };
 
 function truncate(str: string, n: number): string {
@@ -20,6 +22,7 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
   paragraph,
   topics,
   document_type,
+  document_level,
 }) => (
   <div
     className="ArticleBlock tiny"
@@ -30,7 +33,7 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
       display: "inline-block",
       position: "relative",
       minWidth: "250px",
-      //   alignSelf: "flex-end",
+      maxWidth: "350px",
     }}
   >
     <div className="text" style={{ marginTop: "0" }}>
@@ -44,11 +47,15 @@ const ArticleBlockTiny: React.FC<ArticleBlockProps> = ({
       </Link>
       <div
         className="t-BodySerif small intro"
-        style={{ paddingTop: "16px", paddingBottom: "16px" }}
+        style={{
+          paddingTop: "16px",
+          paddingBottom: document_level ? "60px" : "10px",
+        }}
       >
         {truncate(paragraph, 120)}
       </div>
-      <div style={{ bottom: "0", position: "absolute" }}>
+      <div style={{ position: "absolute", bottom: 0 }}>
+        {document_level ? <ArticleLevel level={document_level} /> : <></>}
         <StringsWithHashtags strings={topics} />
       </div>
     </div>

@@ -87,6 +87,7 @@ export default function Topbar() {
               paragraph={post.intro}
               topics={post.topics}
               document_type={post.document_type}
+              document_level={post.document_level}
             />
           ))}
         </div>
