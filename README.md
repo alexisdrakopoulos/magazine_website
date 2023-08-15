@@ -25,4 +25,4 @@ We also dynamically fill in the /topics/ pages.
 
 ## CSS
 
-Note that much of starting point of [globals.css](/magazine/src/app/globals.css) was taken from [www.increment.com](www.increment.com) as I am no designer! I have since modified it significantly to meet my requirements.
+Note that much of starting point of [globals.css](/magazine/src/app/globals.css) was taken from [www.increment.com](https://www.increment.com) as I am no designer! I have since modified it significantly to meet my requirements.
