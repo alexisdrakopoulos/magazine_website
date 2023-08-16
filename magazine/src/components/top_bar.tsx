@@ -6,8 +6,23 @@ export default function Topbar() {
   // get the last few posts as recent posts
   // we get all posts that have a topic tag associated with our topic
   let sortedPosts = allPosts.sort((a, b) => -a.date.localeCompare(b.date));
+
+  // get the most recent announcement post (only 1)
+  let announcementPosts = allPosts.filter((post) =>
+    post._raw.flattenedPath.includes("announcements")
+  );
+  // select first post
+  announcementPosts = announcementPosts.slice(0, 1);
+
+  // ignore all posts with document_type "announcement"
+  sortedPosts = sortedPosts.filter(
+    (post) => post.document_type !== "announcement"
+  );
+
   // select last 5 posts
   sortedPosts = sortedPosts.slice(0, 3);
+
+  // get announcements
 
   return (
     <li
@@ -40,13 +55,17 @@ export default function Topbar() {
           </span>
         </h4>
         <div style={{ display: "flex", height: "100%", minWidth: "250px" }}>
-          <ArticleBlockTiny
-            href="/" // Or you may want to set the href based on something in your Post data
-            title="Test Announcement is here"
-            paragraph="test intro"
-            topics={["test1", "test2"]}
-            document_type="test3"
-          />
+          {announcementPosts.map((post, index) => (
+            <ArticleBlockTiny
+              key={index}
+              href={post.slug} // Or you may want to set the href based on something in your Post data
+              title={post.title}
+              paragraph={post.intro}
+              topics={post.topics}
+              document_type={post.document_type}
+              document_level={post.document_level}
+            />
+          ))}
         </div>
       </div>
       <div
