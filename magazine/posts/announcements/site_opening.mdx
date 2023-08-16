@@ -6,4 +6,58 @@ image: "/bsodjunkie_parallelism_concurrent_surreal_bright_colors_complex_4b426ef
 document_type: "announcement"
 ---
 
-# Welcome
+# Welcome to MinorVersion
+
+This website has been under construction for a couple of weeks, even the domain name is up for debate, I had a few others in mind but this one won out!
+
+My goal for this site is to have a place to write down my thoughts on various topics, and to have a place to share my knowledge with others. The site also exists to scratch an itch I've had to improve my writing skills!
+
+## Types of Content
+
+I have big dreams, but little time. So what types of content am I interested in having on MinorVersion? And at what level of depth/complexity will these topics be covered?
+
+<NoticeBox notice="Article Complexity" noticeType="note">
+  Note that for now, to allow me to write from beginner to more advanced levels,
+  I will tag articles with a little box. This will allow the reader to pick and
+  choose the depth of topic they may want to read.
+</NoticeBox>
+
+### Articles & Series
+
+One of the first things I will be tackling is a short series on clean code in Python. This one is more aimed at beginners but may be of interest to many.
+
+I hope to later tackle more in depth topics ranging from lesser known MC techniches such as Langevin MC, to discussing existing solutions to problems such as caching, concurrency and HPC.
+
+### Interviews
+
+Over my extremely short career I have met some truly incredibly individuals from industries ranging from cloud computing at AWS, to being CTOs of small startups and everything in between. I would love to interview them with a focus on a specific technical topic, and let them share their thoughts with the world through MinorVersion.
+
+### Commentary & Opinions
+
+While I have had a short career, I still have some opinions here and there, and I'd like to share them! These range from my thoughts on premature optimization, to antipatterns, to the pains I have with Python dependency management.
+
+## What does the name mean?
+
+The name is a play on the term "major version" in software engineering. A major version is a big change to a piece of software, for example, going from version 1.0 to 2.0. A minor version is a smaller change, for example, going from version 1.0 to 1.1.
+
+## Technical Details for the Nerds
+
+This is a [NextJS](https://nextjs.org) 13 site using the new fancy approuter. I use [typescript](https://www.google.com/search?client=safari&rls=en&q=typescript&ie=UTF-8&oe=UTF-8) and then just old-school CSS. If I were to make it again I'd use [tailwind](https://tailwindcss.com).
+
+I use [sendgrid](https://sendgrid.com) for emails.
+
+This site is hosted on [vercel](https://vercel.com).
+
+The blog posts are written in [mdx](https://mdxjs.com) and I use [contentlayer](https://www.contentlayer.dev) to parse the mdx to JSON.
+
+Images are AI generated and are all "original".
+
+### Some Cool Stuff
+
+We dynamically fill most of the pages, blog pages are dynamically generated based on mdx articles in /posts/ along with metadata.
+
+We also dynamically fill in the /topics/ pages.
+
+### CSS
+
+Note that much of starting point of [globals.css](/magazine/src/app/globals.css) was taken from [www.increment.com](https://www.increment.com) as I am no designer! I have since modified it significantly to meet my requirements.
