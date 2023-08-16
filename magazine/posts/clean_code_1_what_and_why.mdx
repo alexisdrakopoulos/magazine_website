@@ -12,6 +12,12 @@ document_type: "commentary"
 document_level: "BEGINNER"
 ---
 
+<QuoteComponent
+  author="Harold Abelson, co-author of"
+  text="Programs must be written for people to read, and only incidentally for machines to execute."
+  source="Structure and Interpretation of Computer Programs"
+/>
+
 # Clean Code, What and Why?
 
 Not to sound like your therapist, but what do you feel when you look at this code?
@@ -30,12 +36,10 @@ or this code?
 f = lambda n:pow(2<<n,n+1,(4<<2*n)-(2<<n)-1)%(2<<n)
 ```
 
-You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably normal.
-
-The code runs though, so why have this response? Code, afterall, has a single job: communicate instructions to an underlying machine and produce a correct result. Well to put it simply, if you are reading this, you are most likely not a machine; but a human. As humans, our interaction with code is significantly more layered and nuanced. Our job is not to run the code we read, but to understand it. The cleanliness of code can be thought of as the complexity involved with understanding it, but we'll discuss this later.
+You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably a software engineer.
 
 ## Why do people care?
 
-If the code successfully executes, why does anyone care how "clean" the code is?
+What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
 
-Useful code is very rarely written in a vacuum by a single contributor, to be never again looked upon.
+Useful code is rarely written in isolation by an individual contributor, only to be left like a static framed painting. Instead, code often evolves at a pace unforeseen by its original creator, adapting swiftly to ever-shifting requirements and demands.

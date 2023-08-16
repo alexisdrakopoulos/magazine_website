@@ -6,13 +6,14 @@ import type { MDXComponents } from "mdx/types";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Link from "next/link";
 import Image from "next/image";
+import QuoteComponent from "@/components/article_quote";
+import { QuoteProps } from "@/components/article_quote";
 
 // Define your custom MDX components.
 const mdxComponents: MDXComponents = {
-  // Override the default <a> element to use the next/link component.
-  // a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
-  // Add a custom component.
+  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
   NoticeBox: (props: NoticeProps) => <NoticeBox {...props} />,
+  QuoteComponent: (props: QuoteProps) => <QuoteComponent {...props} />,
 };
 
 // export const generateStaticParams = () =>

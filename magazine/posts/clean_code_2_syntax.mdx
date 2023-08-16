@@ -1,0 +1,52 @@
+---
+title: "Clean Code: The Art of Readable Syntax"
+date: "2023-08-16"
+intro: "In the first chapter of our clean code journey, we discuss syntax, starting from the naming of variables, the writing of comments and much more!"
+image: "/finite_state_machine.jpg"
+topics:
+  - software-engineering
+  - python
+subtopics:
+  - python
+document_type: "commentary"
+document_level: "BEGINNER"
+---
+
+<QuoteComponent
+  author="Andrew Hunt and David Thomas"
+  text="How you write code is as much a matter of personal style as how you wear your hair. But just as there are bad hair days, there are bad code days."
+  source="The Pragmatic Programmer"
+/>
+
+# Syntax
+
+"Syntax refers to the arrangement of words and phrases to create well-formed sentences in a language." - ChatGPT.
+
+Programming languages, usually, have a well defined grammar; a set of reserved keywords, data types, operators, punctuation, scoping rules, etc... In Python 3, this syntax is defined in the [Python Language Reference](https://docs.python.org/3/reference/index.html).
+
+While the grammar of a language gives us a framework with which to produce valid programs, it does not prescribe how to write clean code. Knowing the grammar of a spoken language allows one to form coherent sentences, but does not necessarily make one an eloquent communicator.
+
+## Conventions
+
+No, I don't mean comicon, but rather a set of additional rules that are not enforced by the language, though third party tools often exist to add a layer of enforcement, but are generally accepted by the community. Conventions will be mentioned throughout these articles, as following them is a key part of writing clean code. Conventions allow programmers around the world to write code in a unified manner that extends beyond syntactical rules. This normalization of code reduces the mental barrier to entry when reading foreign code, as a well trained programmers brain knows what to expect.
+
+## Naming
+
+Other than reserved keywords, programmers are left to their own devices when it comes to naming variables, functions, classes, their children, and so on.
+
+### Naming Conventions & PEP 8
+
+In Python, the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide is the de facto standard for naming conventions. It is a good idea to read through it at least once, and to keep it handy for reference, though we will cover much of what it contains throughout the articles in this series.
+
+### Naming Styles
+
+|                         | Convention                           | Example       |
+| ----------------------- | ------------------------------------ | ------------- |
+| **Variables**           | lower case, words separated by a `_` | `my_variable` |
+| **Constants**           | UPPER CASE, words separated by a `_` | `MY_CONSTANT` |
+| **Functions & Methods** | lower case, words separated by a `_` | `my_function` |
+| **Classes**             | CamelCase                            | `MyClass`     |
+
+## Comments
+
+## Control Flow
