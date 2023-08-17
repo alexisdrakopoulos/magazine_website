@@ -38,8 +38,63 @@ f = lambda n:pow(2<<n,n+1,(4<<2*n)-(2<<n)-1)%(2<<n)
 
 You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably a software engineer.
 
-## Why do people care?
-
 What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
 
+## Malicious Code
+
+Dirty code is malicious. It taxes readers unnecessarily by forcing them to spend precious time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such.
+
+To put it another way, it has unecessary **complexity**.
+
+## Complexity
+
+Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code.
+
+**Necessary complexity** can be defined as the minimum required complexity a code must have to still solve the underlying problem for which the code was written. Unnecessary complexity is any complexity beyond this minimum.
+
+When you read the first snippet of code:
+
+```python
+def f(v):
+  s = 0
+  for i in range(len(v)):
+    s = s + v[i]
+  return s
+```
+
+you likely took a few seconds, maybe more, to understand what the function `f()` is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
+
+This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like: `sum(velocities)`. We can now even see that `v` was actually some `Sequence` datastructure storing velocity information.
+
+## Why Clean Code?
+
 Useful code is rarely written in isolation by an individual contributor, only to be left like a static framed painting. Instead, code often evolves at a pace unforeseen by its original creator, adapting swiftly to ever-shifting requirements and demands.
+
+This constant torrent of change requires contributors to read and write code at fast paces. Having unecessary complexity slows contributors down.
+
+### Broken Windows Theory
+
+<QuoteComponent
+  author="Larry McEnerney"
+  text=""
+  source="The Craft of Writing Effectively"
+/>
+
+## Writing Effectively
+
+<QuoteComponent
+  author="Larry McEnerney"
+  text="What is professional writing? It's not conveying your ideas to your readers. It's changing their ideas. Nobody cares what ideas you have."
+  source="The Craft of Writing Effectively"
+/>
+
+When writing spoken language, good authors consider context, who the reader likely is, and what they want. Just like any product, writing must deliver enough value to the reader to justify the valuable time and energy spent reading! Readers don't care what thoughts we have, no matter how novel, but rather how these thoughts may change their own.
+
+<NoticeBox notice="The Craft of Writing Effectively" noticeType="note">
+  I highly recommend this [lecture](https://youtu.be/vtIzMaLkCaM) by Larry
+  McEnerney. His discussion on the shortcomings of taught writing and their
+  implications to technical writing are highly insightful and relevant to
+  programmers.
+</NoticeBox>
+
+## Writing Code Effectively
