@@ -77,7 +77,7 @@ which is often hidden tucked away in the return statement.
 
 So why is this so bad?
 
-Not only `None` is falsy!
+Not only `None{:python}` is falsy!
 
 ```python
 print([] or "hi there")
@@ -87,7 +87,7 @@ print(0 or "hi there")
 print(0.0 or "hi there")
 ```
 
-print statements are perhaps not the best way to highlight this, you can also do `bool([])`.
+print statements are perhaps not the best way to highlight this, you can also do `bool([]){:python}`.
 
 So doing:
 
@@ -95,7 +95,7 @@ So doing:
 x: dict = x or {}
 ```
 
-will `return {}` if x is any falsy value, rather than a None. This is extremely dangerous, for example imagine our previous func `multiply_potentially_nones`:
+will `return {}{:python}` if x is any falsy value, rather than a None. This is extremely dangerous, for example imagine our previous func `multiply_potentially_nones{:.entity.name.function}`:
 
 ```python
 def multiply_potentially_nones(arg1: Optional[float] = None,
@@ -161,5 +161,5 @@ Python bypasses magic methods for performance
 - methods that should be funcs or staticmethods
 - methods that should be properties
 - overwriting builtins
-- not leveraging object structures for iteration (eg `.items()`)
+- not leveraging object structures for iteration (eg `.items(){:.entity.name.function}`)
   etc...
