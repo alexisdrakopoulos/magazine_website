@@ -10,9 +10,10 @@ const featuredSlugs = [
   "/hidden_state_machines",
   "/python_caching_overview",
   "/annoying_python_patterns",
-  "/test",
-  "/test",
-  "/test",
+  "/clean_code_1_what_and_why",
+  "/clean_code_2_syntax",
+  "/loops_2x_faster_in_function",
+  "/python_functools_lru_cache",
 ];
 
 export default function Home() {
