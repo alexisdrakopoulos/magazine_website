@@ -11,9 +11,9 @@ const featuredSlugs = [
   "/clean_code_1_what_and_why",
   "/clean_code_2_syntax",
   "/python_caching_overview",
-  "/annoying_python_patterns",
   "/loops_2x_faster_in_function",
   "/python_functools_lru_cache",
+  "/annoying_python_patterns",
 ];
 
 export default function Home() {
