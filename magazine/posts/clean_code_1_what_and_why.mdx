@@ -64,15 +64,19 @@ This code, has unecessary complexity! It demanded of us more labour than require
 
 Code is clean when it solves an underlying problem using only necessary complexity.
 
+<NoticeBox notice="Clean Code is more than you might think!" noticeType="note">
+To motivate this series of articles, we presented a few short snippets of messy code. It is important to realise that larger pieces of code, are not equivalent to a series of short pieces of code. Larger pieces of code have 
+</NoticeBox>
+
 ## Why Clean Code?
 
 Why is unecessary complexity, or unclean code, a problem?
 
 Useful code is rarely written in isolation by an individual contributor, only to be left like a static framed painting. Instead, code often evolves at a pace unforeseen by its original creator, adapting swiftly to ever-shifting requirements and demands. This constant torrent of change requires contributors to read and write code at fast paces. Having unecessary complexity slows contributors down.
 
-Here are a few common reasons someone may need to read code:
-- Bug Fixing
-- Extending
+What would require/cause someone to need to read code?
+- Bug Fixing: any reasonably large piece of code will have some path of logic which causes either an unexpected consequence, such as an error. As bugs are discovered, contributors will hopefully desire to fix them. Fixing a bug usually requires a good understanding of the underlying programmatic cause. The more complex the code, the more exponentially difficult finding the root cause becomes. Clean code helps ensure that bugs can be understood and addressed in a reasonable amount of time.
+- Extending: useful code is code that is used. Users will inevitably ask for additional features, or to fill the gaps where they believe one exists.
 
 ### Broken Windows Theory
 
