@@ -40,13 +40,9 @@ You may feel a little bit of anxiety, or maybe you feel nothing at all. If you f
 
 What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
 
-## Malicious Code
+## Malicious Code & Complexity
 
-Dirty code is malicious. It taxes readers unnecessarily by forcing them to spend precious time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such.
-
-To put it another way, it has unecessary **complexity**.
-
-## Complexity
+Dirty code is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such. To put it another way, it has unecessary **complexity**.
 
 Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code.
 
@@ -64,13 +60,19 @@ def f(v):
 
 you likely took a few seconds, maybe more, to understand what the function `f()` is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
 
-This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like: `sum(velocities)`. We can now even see that `v` was actually some `Sequence` datastructure storing velocity information.
+This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like: `sum(velocities)`. We can now even see that `v` was actually some datastructure storing velocity information on which we compute a sum.
+
+Code is clean when it solves an underlying problem using only necessary complexity.
 
 ## Why Clean Code?
 
-Useful code is rarely written in isolation by an individual contributor, only to be left like a static framed painting. Instead, code often evolves at a pace unforeseen by its original creator, adapting swiftly to ever-shifting requirements and demands.
+Why is unecessary complexity, or unclean code, a problem?
 
-This constant torrent of change requires contributors to read and write code at fast paces. Having unecessary complexity slows contributors down.
+Useful code is rarely written in isolation by an individual contributor, only to be left like a static framed painting. Instead, code often evolves at a pace unforeseen by its original creator, adapting swiftly to ever-shifting requirements and demands. This constant torrent of change requires contributors to read and write code at fast paces. Having unecessary complexity slows contributors down.
+
+Here are a few common reasons someone may need to read code:
+- Bug Fixing
+- Extending
 
 ### Broken Windows Theory
 
