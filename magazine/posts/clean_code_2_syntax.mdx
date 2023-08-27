@@ -66,12 +66,23 @@ age = 28
 
 The thoughtful naming of these variables is a key component of clean code. If the above code just said `x = 28{:python}` the reader would have no reasonable way of ascertaining that `x` refers to an age. If the code instead said `name_of_the_person_called_alexis = 28{:python}` thta may be quite specific and clear to the reader, but would add unnecessary complexity!
 
-The art of naming is again the same art of the rest of clean code. What is the minimum (required) complexity to naming a variable such that the context can reasonably be ascertained without slowing down or confusing the reader. The names of variables should tell the reader what they contain in the context they live in. In the above context, it is clear that `age{:python}` refers to the age of the person who's name is defined of the preceding line.
+The art of naming is again the same art of the rest of clean code. What is the minimum (required) complexity to naming a variable such that the context can reasonably be ascertained without slowing down or confusing the reader. The names of variables should tell the reader what they contain in the context they live in. In the above context, it is clear that `age{:python}` refers to the age of the person who's name is defined of the preceding line. Knowing the context and the level of abstraction is an important part of not only naming variables, but of all clean code concepts. We will discuss abstraction in a separate article as it is a large topic that deserves its own treatment.
+
+### Common Naming Mistakes/Anti-Patterns
+
+- Not following conventions: Follow the pep8 conventions or the conventions of the code base you are writing in.
+- Acronyms & shortening: Avoid trying to save a few keystrokes by shortening variable names. For example `usr_inp` instead of `user_input`. The exception to this advice is for well known or agreed upon acronyms/placeholders such as `_`, `i`, `num`, `N` and so on.
+- Inconsistency: Whatever style of naming you choose, keep it consistent throughout the code base. If the code base is not yours, see if you can figure out what style they use. It doesn't matter if the style is not your preferred one, consistency is key.
+- Using reserved keywords: Python has a small set of reserved keywords, avoid using variable names that overwrite them, I quite often see `list`, `dict` or `type` used as variable names, which is a bad idea!
+- Datastructures in the name: It is tempting to clarify what the name is storing. For example let's say we have a variable that is storing a list of floats representing velocities. It can be tempting to name this `velocities_list` as it allows the reader to quickly figure out what the variable is storing, so it seems like an easy way to improve code clarity. It is a better idea however to use type hints (discussed further down) if the type of a variable is not clear from the context. The question also arrises, do I care if velocities are stored in a list? or do I only care if they are in a `Sequence` type? Should it therefore be called `velocities_sequence`? Variable names should contain the minimum necessary complexity to convey the context what the variable stores. Specifying that the velocities are in a `list` is not always necessary.
 
 ## Comments
 
-You may have heard "clean code is self-documenting".
+<QuoteComponent
+  author="Many Programmers"
+  text="Clean cde is self-documenting!"
+/>
 
 ## Control Flow
 
-## File Names
+## Type Hints
