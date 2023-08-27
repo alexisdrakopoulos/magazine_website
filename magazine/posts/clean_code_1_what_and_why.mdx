@@ -20,7 +20,7 @@ document_level: "BEGINNER"
 
 # Clean Code & Unecessary Complexity?
 
-Not to sound like your therapist, but what do you feel when you look at this code?
+Both of the following snippets perform the same calculation:
 
 ```python
 # v is defined somewhere above
@@ -30,37 +30,20 @@ for i in range(len(v)):
 print(s)
 ```
 
-or this code?
+and:
 
 ```python
-f = lambda n:pow(2<<n,n+1,(4<<2*n)-(2<<n)-1)%(2<<n)
+# velocities is defined somewhere above
+sum(velocities)
 ```
 
-You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably a software engineer.
+Which one is better?
 
-What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
-
-Welcome to a series of beginner level articles on clean code. By reading this series of articles, you will learn the answers to:
-
-- What do people mean by clean code?
-- Why should I care? How does it affect me?
-- What does clean code look like in a modern Python context?
-- Where can I go to learn more?
-
-We will start by motivating clean code, and discussing at a high level what the problems with dirty code are. We will then start from syntax and work our way up to larger scale design and architecture. We will discuss the tools and techniques that can be used to write clean code, and how to apply them to a modern Python code base.
-
-<NoticeBox notice="What is our definition of clean code?" noticeType="note">
-  Note that our definition of clean code relates to complexity. There is no
-  agreed upon definition of what constitutes clean code. We are unlikely to
-  discuss any controversial topics as we will be focusing on fundamentals. We
-  will not be discussing topics such as the merits of functional vs object
-  oriented programming, or the merits of static vs dynamic typing. We will be
-  discussing topics such as naming, documentation, testing, design and so on.
-</NoticeBox>
+You likely chose option 2, but why? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
 
 ## Malicious Code
 
-Dirty code, such as the snippets above, is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such. To put it another way, it has **unecessary complexity**.
+Dirty code, such as the code in the first snippet, is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering its inner logic. To put it another way, it has **unecessary complexity**.
 
 Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code. Complexity is not inherently bad.
 
