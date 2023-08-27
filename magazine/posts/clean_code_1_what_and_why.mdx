@@ -18,9 +18,29 @@ document_level: "BEGINNER"
   source="Structure and Interpretation of Computer Programs"
 />
 
-Welcome to a series of beginner level articles, though programmers of varying degrees of experience may find them useful, relating to clean code. Note that these articles are my own opinion and experiences, and are meant to serve as a high level introduction to clean code in Python.
+# Clean Code & Unecessary Complexity?
 
-By reading this series of articles, you will learn the answers to:
+Not to sound like your therapist, but what do you feel when you look at this code?
+
+```python
+# v is defined somewhere above
+s = 0
+for i in range(len(v)):
+  s = s + v[i]
+print(s)
+```
+
+or this code?
+
+```python
+f = lambda n:pow(2<<n,n+1,(4<<2*n)-(2<<n)-1)%(2<<n)
+```
+
+You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably a software engineer.
+
+What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
+
+Welcome to a series of beginner level articles on clean code. By reading this series of articles, you will learn the answers to:
 
 - What do people mean by clean code?
 - Why should I care? How does it affect me?
@@ -38,30 +58,6 @@ We will start by motivating clean code, and discussing at a high level what the 
   discussing topics such as naming, documentation, testing, design and so on.
 </NoticeBox>
 
-Let's get started!
-
-# Clean Code & Unecessary Complexity?
-
-Not to sound like your therapist, but what do you feel when you look at this code?
-
-```python
-def f(v):
-  s = 0
-  for i in range(len(v)):
-    s = s + v[i]
-  return s
-```
-
-or this code?
-
-```python
-f = lambda n:pow(2<<n,n+1,(4<<2*n)-(2<<n)-1)%(2<<n)
-```
-
-You may feel a little bit of anxiety, or maybe you feel nothing at all. If you feel nothing, then you are probably a psychopath. If you feel anxiety, then you are probably a software engineer.
-
-What evokes such a response? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
-
 ## Malicious Code
 
 Dirty code, such as the snippets above, is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such. To put it another way, it has **unecessary complexity**.
@@ -73,16 +69,23 @@ Code **complexity** refers to how challenging or convoluted a piece of code is t
 When you read the first snippet of code:
 
 ```python
-def f(v):
-  s = 0
-  for i in range(len(v)):
-    s = s + v[i]
-  return s
+# v is defined somewhere above
+s = 0
+for i in range(len(v)):
+  s = s + v[i]
+print(s)
 ```
 
-you likely took a few seconds, maybe more, to understand what the function `f()` is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
+you likely took a few seconds, maybe more, to understand what the code is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
 
-This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like: `sum(velocities)`. We can now even see that `v` was actually some datastructure storing velocity information on which we compute a sum.
+This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like:
+
+```python
+# velocities is defined somewhere above
+sum(velocities)
+```
+
+We can now even see that `v` was actually some datastructure storing velocity information on which we compute a sum.
 
 Code is clean when it solves an underlying problem using only necessary complexity.
 
