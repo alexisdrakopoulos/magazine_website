@@ -27,7 +27,6 @@ Both of the following snippets perform the same calculation:
 s = 0
 for i in range(len(v)):
   s = s + v[i]
-print(s)
 ```
 
 and:
@@ -39,7 +38,7 @@ sum(velocities)
 
 Which one is better?
 
-You likely chose option 2, but why? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why do the above snippets make us uncomfortable?
+You likely chose option 2, but why? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why is one better than another?
 
 ## Malicious Code
 
@@ -56,7 +55,6 @@ When you read the first snippet of code:
 s = 0
 for i in range(len(v)):
   s = s + v[i]
-print(s)
 ```
 
 you likely took a few seconds, maybe more, to understand what the code is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
