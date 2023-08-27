@@ -1409,8 +1409,6 @@ a {
 
 .ContentBody b, .ContentBody strong {
   font-weight: 700;
-  font-size: 103%;
-  letter-spacing:-.007em
 }
 
 .ContentBody em, .ContentBody em strong, .ContentBody strong em {
