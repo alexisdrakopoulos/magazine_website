@@ -18,6 +18,28 @@ document_level: "BEGINNER"
   source="Structure and Interpretation of Computer Programs"
 />
 
+Welcome to a series of beginner level articles, though programmers of varying degrees of experience may find them useful, relating to clean code. Note that these articles are my own opinion and experiences, and are meant to serve as a high level introduction to clean code in Python.
+
+By reading this series of articles, you will learn the answers to:
+
+- What do people mean by clean code?
+- Why should I care? How does it affect me?
+- What does clean code look like in a modern Python context?
+- Where can I go to learn more?
+
+We will start by motivating clean code, and discussing at a high level what the problems with dirty code are. We will then start from syntax and work our way up to larger scale design and architecture. We will discuss the tools and techniques that can be used to write clean code, and how to apply them to a modern Python code base.
+
+<NoticeBox notice="What is our definition of clean code?" noticeType="note">
+  Note that our definition of clean code relates to complexity. There is no
+  agreed upon definition of what constitutes clean code. We are unlikely to
+  discuss any controversial topics as we will be focusing on fundamentals. We
+  will not be discussing topics such as the merits of functional vs object
+  oriented programming, or the merits of static vs dynamic typing. We will be
+  discussing topics such as naming, documentation, testing, design and so on.
+</NoticeBox>
+
+Let's get started!
+
 # Clean Code & Unecessary Complexity?
 
 Not to sound like your therapist, but what do you feel when you look at this code?
@@ -42,11 +64,11 @@ What evokes such a response? Code fundamentally serves to communicate instructio
 
 ## Malicious Code
 
-Dirty code is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such. To put it another way, it has unecessary **complexity**.
+Dirty code, such as the snippets above, is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering the writings of a madman. It is a form of torture, and should be treated as such. To put it another way, it has **unecessary complexity**.
 
-Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code.
+Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code. Complexity is not inherently bad.
 
-**Necessary complexity** can be defined as the minimum required complexity a code must have to still solve the underlying problem for which the code was written. Unnecessary complexity is any complexity beyond this minimum.
+**Necessary complexity** can be defined as the minimum required complexity a code must have to still solve the underlying problem for which the code was written. Unnecessary complexity is any complexity beyond this minimum. Note that this concept of necessary complexity goes beyond syntax and includes design, documentation and all aspects related to the user and developer experience.
 
 When you read the first snippet of code:
 
@@ -65,7 +87,9 @@ This code, has unecessary complexity! It demanded of us more labour than require
 Code is clean when it solves an underlying problem using only necessary complexity.
 
 <NoticeBox notice="Clean Code is more than you might think!" noticeType="note">
-To motivate this series of articles, we presented a few short snippets of messy code. It is important to realise that larger pieces of code, are not equivalent to a series of short pieces of code. Larger pieces of code have 
+  To motivate this series of articles, we presented a few short snippets of
+  messy code. It is important to realise that larger pieces of code, are not
+  equivalent to a series of short pieces of code. Larger pieces of code have
 </NoticeBox>
 
 ## Why is Unnecessary Complexity an Issue?
