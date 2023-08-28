@@ -87,6 +87,47 @@ The art of naming is again the same art of the rest of clean code. What is the m
 
 At first glance, comments seem like a brilliant idea. We can add them everywhere to make it extremely clear to any reader what our intention was, what the code is doing, what our favorite cats name is and so on. However, comments **can** add unecessary complexity!
 
+Comments are often seen as a freeby when it comes to improving code legability, with programmers ignoring the fact that each comment is an additional thing to:
+
+- maintain: as code changes, so do any comments that refer to this code (see [Section 2.4](#comments-fall-out-of-date))
+- read: some comments are good, however if there are too many comments that are bad, it becomes difficult to know which are important to read. It becomes easy for readers to skip comments entirely when being bombarded by them.
+- not enforced: There are no enforcement mechanisms for comments. From the perspective of the interpreter, comments might as well not exist. Comments therefore are entirely enforced by the programmer and readers. This is related to maintainability, as each comment must be read, understood and validated manually.
+
+#### Comments that state the obvious
+
+It is common for programmers to want to comment everything:
+
+```python
+# add x and y and assign it to v
+v = x + y
+
+# double the value of v
+v *= 2
+
+# print v
+print(v)
+```
+
+#### Comments fall out of date
+
+Another common issue in fast moving codebases are comments that fall out of date. What might start as:
+
+```python
+# add x and y and assign it to v
+v = x + y
+```
+
+can quickly become:
+
+```python
+# add x and y and assign it to v
+v = x * y
+```
+
+due to a changing requirement or bug fix. We now have a comment which disagrees with the code it comments! What a nightmare! Comments which are out of date, and therefore wrong, also contribute to the mental overhead of reading code. The reader must now decide whether to trust the comment or the code, and if the comment is wrong, what else is wrong?
+
+#### Commented out code
+
 ### Control Flow
 
 ### Type Hints
