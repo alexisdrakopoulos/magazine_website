@@ -142,6 +142,32 @@ due to a changing requirement or bug fix. We now have a comment which disagrees 
 
 ### Commented out code
 
+Version control systems (such as [Git](https://git-scm.com)) are a critical tool for the development process. We will not be delving into Git in this article but it is worth mentioning that it is a tool that allows us to track changes to our code over time.
+
+Even with a version control system, it is common to see:
+
+```python
+# v = x + y
+v = x * y
+```
+
+where old code has been commented out in favor if new code. Do not do this! Delete the old code! If it is commented out, it is no longer needed. If you need it again, you can always revert to a previous version of the code.
+
+The example above may not seem so terrible, however imagine a large code base with seemingly random commented out code throughout it. After a short while nobody remembers why the code was commented out, what it used to do, will it still work if we uncomment it? and so on.
+
+### How to Write Good Comments
+
+Now that we have gone over what bad comments commonly look like, what do good comments look like?
+
+Good comments **reduce** the complexity of the code they comment.
+
+Common ways of achieving this is to add context and information, when required, that may not be apparent from reading the code itself. It is incredibly rare that this missing information relates to what the code does itself, rather it's more likely to be related to WHY the code exists at all.
+
+```python
+# Need v to keep track of the largest possible value
+v = x * y
+```
+
 ## Control Flow
 
 ## Type Hints
