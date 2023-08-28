@@ -39,7 +39,7 @@ Conventions establish a predictable structure and format that facilitate a more 
 
 Imagine you were asked to help set the table at a friends house, you are looking for forks, spoons and knives. While reading this sentence, you are already imagining a drawer around 20 - 30cm in height, around 40 - 70cm in width, probably located right under the counter above a larger drawer or cabinet. This mental image is formed because most people follow a similar convention of organizing kitchen utensils. Similarly, adhering to programming conventions can make it easier to understand and navigate code. Just as you know where to look for the utensils, following conventions in programming helps you know where to look in the code and what to expect.
 
-## Naming
+# Naming
 
 Other than reserved keywords, programmers are left to their own devices when it comes to naming variables, functions, classes, their children, and so on.
 
@@ -57,7 +57,7 @@ So one might think, following this set of conventions will lead one to write cle
 
 Note that there are many conventions beyond naming, including ones that relate to design, comments, docstring, testing and so on. It is highly recommended to learn and follow conventions.
 
-### Variables
+## Variables
 
 In programs, variables are names which refer/point to an object. For example, the following program defines two variables `name{:python}` and `age{:python}` which refer to a string and integer respectively:
 
@@ -70,19 +70,33 @@ The thoughtful naming of these variables is a key component of clean code. If th
 
 The art of naming is again the same art of the rest of clean code. What is the minimum (required) complexity to naming a variable such that the context can reasonably be ascertained without slowing down or confusing the reader. The names of variables should tell the reader what they contain in the context they live in. In the above context, it is clear that `age{:python}` refers to the age of the person who's name is defined of the preceding line. Knowing the context and the level of abstraction is an important part of not only naming variables, but of all clean code concepts. We will discuss abstraction in a separate article as it is a large topic that deserves its own treatment.
 
-#### Common Naming Mistakes/Anti-Patterns
+### Common Naming Mistakes/Anti-Patterns
 
-- Not following conventions: Follow the pep8 conventions or the conventions of the code base you are writing in.
-- Acronyms & shortening: Avoid trying to save a few keystrokes by shortening variable names. For example `usr_inp` instead of `user_input`. The exception to this advice is for well known or agreed upon acronyms/placeholders such as `_`, `i`, `num`, `N` and so on.
-- Inconsistency: Whatever style of naming you choose, keep it consistent throughout the code base. If the code base is not yours, see if you can figure out what style they use. It doesn't matter if the style is not your preferred one, consistency is key.
-- Using reserved keywords: Python has a small set of reserved keywords, avoid using variable names that overwrite them, I quite often see `list`, `dict` or `type` used as variable names, which is a bad idea!
-- Datastructures in the name: It is tempting to clarify what the name is storing. For example let's say we have a variable that is storing a list of floats representing velocities. It can be tempting to name this `velocities_list` as it allows the reader to quickly figure out what the variable is storing, so it seems like an easy way to improve code clarity. It is a better idea however to use type hints (discussed further down) if the type of a variable is not clear from the context. The question also arrises, do I care if velocities are stored in a list? or do I only care if they are in a `Sequence` type? Should it therefore be called `velocities_sequence`? Variable names should contain the minimum necessary complexity to convey the context what the variable stores. Specifying that the velocities are in a `list` is not always necessary.
+#### Not Following Conventions
 
-### Comments
+Follow the pep8 conventions or the conventions of the code base you are writing in.
+
+#### Unecessary Acronyms & Shortening of Wrds
+
+Avoid trying to save a few keystrokes by shortening variable names. For example `usr_inp` instead of `user_input`. The exception to this advice is for well known or agreed upon acronyms/placeholders such as `_`, `i`, `num`, `N` and so on.
+
+#### Inconsitent Style
+
+Whatever style of naming you choose, keep it consistent throughout the code base. If the code base is not yours, see if you can figure out what style they use. It doesn't matter if the style is not your preferred one, consistency is key.
+
+#### Overwriting Reserved Keywords
+
+Python has a small set of reserved keywords, avoid using variable names that overwrite them, I quite often see `list`, `dict` or `type` used as variable names, which is a bad idea!
+
+#### Datastructures in the Name
+
+It is tempting to clarify what the name is storing. For example let's say we have a variable that is storing a list of floats representing velocities. It can be tempting to name this `velocities_list` as it allows the reader to quickly figure out what the variable is storing, so it seems like an easy way to improve code clarity. It is a better idea however to use type hints (discussed further down) if the type of a variable is not clear from the context. The question also arrises, do I care if velocities are stored in a list? or do I only care if they are in a `Sequence` type? Should it therefore be called `velocities_sequence`? Variable names should contain the minimum necessary complexity to convey the context what the variable stores. Specifying that the velocities are in a `list` is not always necessary.
+
+## Comments
 
 <QuoteComponent
   author="Many Programmers"
-  text="Clean cde is self-documenting!"
+  text="Clean code is self-documenting!"
 />
 
 At first glance, comments seem like a brilliant idea. We can add them everywhere to make it extremely clear to any reader what our intention was, what the code is doing, what our favorite cats name is and so on. However, comments **can** add unecessary complexity!
@@ -93,7 +107,7 @@ Comments are often seen as a freeby when it comes to improving code legability, 
 - read: some comments are good, however if there are too many comments that are bad, it becomes difficult to know which are important to read. It becomes easy for readers to skip comments entirely when being bombarded by them.
 - not enforced: There are no enforcement mechanisms for comments. From the perspective of the interpreter, comments might as well not exist. Comments therefore are entirely enforced by the programmer and readers. This is related to maintainability, as each comment must be read, understood and validated manually.
 
-#### Comments that state the obvious
+### Comments that state the obvious
 
 It is common for programmers to want to comment everything:
 
@@ -108,7 +122,7 @@ v *= 2
 print(v)
 ```
 
-#### Comments fall out of date
+### Comments fall out of date
 
 Another common issue in fast moving codebases are comments that fall out of date. What might start as:
 
@@ -126,11 +140,11 @@ v = x * y
 
 due to a changing requirement or bug fix. We now have a comment which disagrees with the code it comments! What a nightmare! Comments which are out of date, and therefore wrong, also contribute to the mental overhead of reading code. The reader must now decide whether to trust the comment or the code, and if the comment is wrong, what else is wrong?
 
-#### Commented out code
+### Commented out code
 
-### Control Flow
+## Control Flow
 
-### Type Hints
+## Type Hints
 
 Python is a dynamically typed language, meaning that the type of a variable is not known until runtime. Languages such as C++ are statically typed, meaning that the type of a variable is known at compile time.
 
