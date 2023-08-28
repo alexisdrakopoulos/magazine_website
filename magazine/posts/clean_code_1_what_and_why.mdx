@@ -20,7 +20,7 @@ document_level: "BEGINNER"
 
 # Clean Code & Unecessary Complexity?
 
-Both of the following snippets perform the same calculation:
+The following two short programs implement the same functionality:
 
 ```python
 # v is defined somewhere above
@@ -29,8 +29,6 @@ for i in range(len(v)):
   s = s + v[i]
 ```
 
-and:
-
 ```python
 # velocities is defined somewhere above
 sum(velocities)
@@ -38,15 +36,15 @@ sum(velocities)
 
 Which one is better?
 
-You likely chose option 2, but why? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why is one better than another?
+Whichever option you chose, though you likely picked option 2, why? Code fundamentally serves to communicate instructions to machines, so if it does so in a correct manner, why is one program better than another?
 
 ## Malicious Code
 
 Dirty code, such as the code in the first snippet, is malicious. It taxes readers unnecessarily by forcing them to spend time and energy deciphering its inner logic. To put it another way, it has **unecessary complexity**.
 
-Code **complexity** refers to how challenging or convoluted a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code. Complexity is not inherently bad.
+Code **complexity** refers to how challenging a piece of code is to understand. It relates to the structural and conceptual intricacies present in the code. Complexity is not inherently bad. By understanding code we mean being able to read it and understand the underlying logic, the responsability each line has, the inputs and outputs and so on.
 
-**Necessary complexity** can be defined as the minimum required complexity a code must have to still solve the underlying problem for which the code was written. Unnecessary complexity is any complexity beyond this minimum. Note that this concept of necessary complexity goes beyond syntax and includes design, documentation and all aspects related to the user and developer experience.
+**Necessary complexity** can be defined as the minimum required complexity a piece of code must have to still solve the underlying problem for which the code was written. Unnecessary complexity is any complexity beyond this minimum. Note that this concept of necessary complexity goes beyond syntax and includes design, documentation and all aspects related to the user and developer experience.
 
 When you read the first snippet of code:
 
@@ -57,7 +55,7 @@ for i in range(len(v)):
   s = s + v[i]
 ```
 
-you likely took a few seconds, maybe more, to understand what the code is doing, what the return `s` would be, what types of inputs it can likely accept and so on. You likely then came to the conclusion that `f()` iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and returns the sum stored in the variable `s`.
+you likely took a few seconds, maybe more, to understand what the code is doing, what `s` would be, why it's first defined as zero and then incremented, what `v` might be. You likely then came to the conclusion that the loop iterates over the elements of `v` and sums them up, assuming that the + operator is doing arithmetic and not something nasty such as concatenation, and stores the summation in the variable `s` which is initialized with the value zero.
 
 This code, has unecessary complexity! It demanded of us more labour than required. The minimum complexity solution, and therefore the clean code one, would be something like:
 
