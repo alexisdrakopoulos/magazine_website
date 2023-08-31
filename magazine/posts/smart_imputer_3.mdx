@@ -1,0 +1,163 @@
+---
+title: "Implementing Tabular Dataset Constraints in Python"
+date: "2023-09-02"
+intro: "In a previous article we discussed what constraints and their validation look like for sparse tabular datasets. We now look at one potential implementation in Python"
+image: "/bsodjunkie_clean_code_surreal_51b2055e-0193-42fa-94f4-7064181d4c21.png"
+topics:
+  - software-engineering
+  - python
+subtopics:
+  - python
+document_type: "commentary"
+document_level: "BEGINNER"
+---
+
+<QuoteComponent
+  author="Harold Abelson, co-author of"
+  text="Programs must be written for people to read, and only incidentally for machines to execute."
+  source="Structure and Interpretation of Computer Programs"
+/>
+
+# Tabular Dataset Constraints
+
+The concept of **row** and **cell** constraints were introduced in our previous article on [Sparse Tabular Datasets: Constraints & Validation](/blog/smart_imputer_2.html).
+
+Having a well-defined conceptual base on which to write an implementation is a rare and fantastic [situtation??], however it still leaves one wondering what the underlying implementation looks like.
+
+In this article we introduce an experimental approach leveraging tools such as the Pydantic library to implement what we will call a `SmartDataset`. This dataset is an object which stores a 2D tabular sparse dataset with assign-time validation as well as soft "run-time" validation.
+
+<NoticeBox
+  notice="OOP and Python? Why not Functional and Haskell?"
+  noticeType="note"
+>
+  Our implementation is quite object oriented. It is very possible to implement
+  elegant functional alternatives. Also note that our use of Python here is due
+  to our dependence on the large machine learning/scientific computing
+  ecosystem. It would be interesting to explore alternatives using stronger
+  typing features present in other languages.
+</NoticeBox>
+
+## Pydantic
+
+[WRITE A PARAGRAPH INTRODUCING PYDANTIC]
+
+### Constraints
+
+Recall we have two types of constraints, **row** and **cell** ones.
+
+These constraints can be added as metadata to a dataset, for now imagine just a dictionary mapping column and row indices or names to a set of unique constraints.
+
+Why did I write columns instead of cells? Our implementation of **cell** constraints will be associated with dataset columns. It will then "act" on each value within a single column. We do not consider other types of multi-value column constraints.
+
+```python
+column_to_constraints = {
+    "col1": [...], # set of constraints on cells in column 1
+    ...
+}
+
+row_constraints = [...]
+```
+
+Note that for now, the above dictionaries will act as datastructures to store our constraints.
+
+For now let's focus on implementing constraints, and only later will we concern ourselves with their resolution. We assume the following:
+
+- Row constraints apply to all rows
+- A row or column can have an unlimited number of unordered constraints
+- Constraints are independent
+- The order of constraints does not affect the final feasible set
+- All implemented constraints result in a feasible set that is non-empty. Validation to ensure constraints are valid can be implemented later on.
+
+Constraints can then be called, to validate a row or values in a column, in a loop:
+
+```python
+for cell_constraint in column_to_constraints[column]:
+    for value in data[column]:
+        if not cell_constraint.validate(value=value):
+            raise ConstraintInvalidError()
+```
+
+Let's unpack the implications of the line above. Cell constraints are objects which implement a `validate` method which take in a `value` which comes from `data[column]`.
+
+Constraints could be implemented in countless ways. It would however be easy to end up with heavy coupling of constraints to specific columns and rows, or over-generalize and have a single constraint class that tries to do everything through complex sets of toggles.
+
+Let's meet in the middle and implement constraints independently of a specific column or row to allow for re-use & generalizability. For example, the constraint of having a value be an integer `x` which must be between two other integers `y < x < z` is relatively generalizable. We could implement a constraint class called `ConstrainedInt`, and on instantiation specify the underlying `y` and `z`. `x` would then be passed in a `.validate(x)` call.
+
+This may look something like:
+
+```python
+class ConstrainedInt(BaseModel):
+    minimum: Optional[int] = None
+    maximum: Optional[int] = None
+
+    def validate(self, value: int) -> bool:
+        if self.minimum and value < self.minimum:
+            return False
+        if self.maximum and value > self.maximum:
+            return False
+
+        return True
+
+column_to_constraint = {
+    "col1": [ConstrainedInt(minimum=5, maximum=100)]
+}
+```
+
+Let's also see what a row constraint might look like for a set of rows representing a percentage of a mixture. The total percentage must always add to 100.
+
+```python
+class SummationConstraint(BaseModel):
+    value: int
+    active_columns: set[str]
+
+    def validate(self, row: pd.Series) -> bool:
+        if sum(row.loc[self.active_columns]) != 100:
+            return False
+
+        return True
+
+row_to_constraints = {
+    1: [SummationConstraint(
+        value=100,
+        active_columns=["col1", "col2", ...],
+        )]
+}
+```
+
+Our row constraints have access to all values present in a specific row. We add an `active_columns` attribute which tells our validation function which columns to use, this could however also be passed to `validate(row=row, active_columns=[...])`.
+
+Having access to the entire row grants us great flexibility in implementing complex constraints. While the above constraints are somewhat general, we can also implement highly domain/problem specific ones.
+
+Recall in the conceptual article we discussed a machine power example, where different machines may have different allowable power levels. Let's say we have two columns, `Machine Type` and `Power Level`. `Machine Type` is a categorical encoded as a string with the values being the names of the machines: `A` and `B`, with `Power Level` being a discrete integer set.
+
+`Machine Type == A` may allow for the set `{50, 100, 125}` whereas `Machine Type == B` may allow for the set `{50, 100, 200}`.
+
+This could be implemented in the following manner:
+
+```python
+class MachineType(Enum):
+    A = 1
+    B = 2
+
+class DependentPowerLevels(BaseModel):
+    possible_values: dict[MachineType: set[int]]
+    machine_column: str = "Machine Type"
+    power_level_column: str = "Power Level"
+
+    def validate(self, row: pd.Series) -> bool:
+        value: int = row[self.power_level_column]
+        machine: MachineType = MachineType[row[self.machine_column]]
+        if value not in possible_values[machine]:
+            return False
+
+        return True
+
+row_to_constraints = {
+    1: [DependentPowerLevels(
+        possible_values={
+            MachineType.A = {50, 100, 125},
+            MachineType.B = {50, 100, 200},
+        }
+        )]
+}
+```

@@ -1,0 +1,145 @@
+---
+title: "Sparse Tabular Datasets: Constraints & Validation"
+date: "2023-09-01"
+intro: "What are Tabular Datasets in the real world? How do their structure & constraints impact modelling/machine learning?"
+image: "/bsodjunkie_clean_code_surreal_51b2055e-0193-42fa-94f4-7064181d4c21.png"
+topics:
+  - software-engineering
+  - python
+subtopics:
+  - python
+document_type: "commentary"
+document_level: "BEGINNER"
+---
+
+<QuoteComponent
+  author="Harold Abelson, co-author of"
+  text="Programs must be written for people to read, and only incidentally for machines to execute."
+  source="Structure and Interpretation of Computer Programs"
+/>
+
+# Real World Data
+
+One of the most prolific data formats is the tabular one. You may be familiar with it through exposure to CSVs, machine learning tutorials, kaggle or any other work you may have done.
+
+Tabular data has a two dimensional structure represented by rows and columns. A dataset can be specified by the number of rows $N$ and columns $M$. We will discuss the structure of real world tabular datasets in the next section. Usually columns are seen as the first dimension with rows being the second, though this is just a convention.
+
+Some datasets might have constraints, these may be formally known or just properties of what the columns/rows represent. There can be different types of constraints, the most common apply either to single values (referred to as cell constraints hereafter) or row constraints.
+
+For example, if a value represents a percentage, it makes little sense for it to be defined as anything other than a `float` or `integer` between `0` and `100` (or `0.0` to `1.0`). This would be a cell constraint.
+
+Perhaps two columns represent the ratio of a recipe, for example column 1 might refer to % of water with column 2 being % of rice by weight. In this setting, the constraint would be a row constraint, with column 1 + column 2 being constrained to being between `0` and `100` and of type float/integer as before, with each column also having the cell constraints from the prior example.
+
+Don't worry if this doesn't yet make much sense, in the following sections we will dive into both the structure and constraints present in real world tabular datasets.
+
+# Structure
+
+Usually, columns contain a single data type and refer to some singular form of data. Columns are usually named. The types contained in columns are often quite fundamental, `floats`, `integers`. Sometimes they might contain categoricals which are encoded as `strings` or `integers`. Sometimes datasets have sparsity, allowing some values to be missing, this is usually encoded by a special type such as `NaN` in `Pandas` and `NumPy`.
+
+Rows often refer to an instance of something, a record, some event, with the columns then refering to the individual values.
+
+## Dimension
+
+In our context, tabular datasets are two dimensional; with the first dimension $M$ representing columns and the second, $N$, representing rows.
+
+Note that the word dimension, in this context, also refers to the actual size of $M$ and $N$.
+
+For Machine Learning/Modelling purposes, one thing that has an extreme impact on our modelling is the ratio of $M$ to $N$.
+
+[MENTION THE POPULAR ML THING ABOUT CURSE OF DIMENSIONALITY HERE]
+
+[EXAMPLE OF DATASET SIZES THAT COMPANIES DEAL WITH]
+
+## Sparsity
+
+Sparsity, in our context, is defined as a missing value.
+
+<NoticeBox notice="Sparse Representations" noticeType="note">
+  Sparse tabular datasets can be represented in many different formats which are
+  not the column vs row ones we discuss in this article. We will not be
+  discussing these formats nor their impacts to modelling. For highly sparse
+  datasets, or for specific sparse structures, using these formats can yield
+  considerable reductions in memory footprint and easier processing/modelling.
+  For our purposes, all datasets will be represented in "dense" format, even if
+  sparse in nature.
+</NoticeBox>
+
+### Sparse Structures
+
+It is incredibly rare for sparsity to be uniformly distributed throughout a dataset. Sparsity usually follows some long tail skewed distribution on both columns and rows. Some columns will have far higher sparsity whereas others will be completely dense, the same is true for rows.
+
+This makes a lot of sense when looking at real world datasets; for example in a dataset where some columns represent measured quantities, some quantities will inevitably be harder to measure than others.
+
+#### Dependent Sparsity
+
+One nasty type of sparsity is what I refer to as the dependent type, where a cell is missing due to another cell being of a specific value (including being sparse itself).
+
+This type of sparsity can be very common in badly formatted datasets, such as datasets that really don't want to be tabular and would rather be a Graph or JSON style format.
+
+Imagine a dataset where each row represents a student and their grades, with columns `Student ID`, `Mathematics Grade`, `Physics Grade` and so on. Some students may not have taken Physics and thefore not have a grade. Obviously this is not an ideal tabular format, something nicer might be `Student ID`, `Class Name`, `Grade`, which would remove sparsity completely as any class a student doesn't have a grade for would not exist as a row.
+
+# Constraints
+
+Row constraints do not have to act on the entire row, they may act on a subset. A row constraint acting on a subset which is comprised of a single column is a cell constraint. We do not touch on column constraints as I find them to be very rare and usually the sign of a badly formed dataset.
+
+Think of a constraint as providing a new set in which values which are valid for a row or cell are defined. Constraints usually reduce the size of this set, though it is possible to have a constraint that doesn't do anything and thus leaves the possible set of valid values intact.
+
+A single row or cell can have multiple row constraints, an unlimited amount in fact, though overlapping constraints will act as the union of sets.
+
+For example if we have two constraints on a cell, one that the cell `x` must be `x > 10`, and another saying `x > 15`, then obviosuly the first constraint is inactive. Or imagine having a constraint that `10 < y < 100` and another saying `y > 50`, then the new constraint would be `50 < y < 100`. The same is true for row constraints that act on more than a single column.
+
+The final set of possible values which are allowable given a set of constraints is called the feasible set.
+
+This is identical to standard form optimization constraints in classical operational research.
+
+It is possible to have constraints which yield an empty feasible set; for example `y > 50` and `y < 50`.
+
+## Cell Constraints
+
+One of the most common constraints which is often overlooked, is the type that a cell can take. Common values may be `float` or `int`, as well as `categorical` which are usually encoded as `int` or `string`. As discussed in the previous section, some columns may also allow sparsity and will usually have a special type to denote a sparse cell. Whether or not a column can be sparse is also a constraint.
+
+### Discrete Sets
+
+The most common type of discrete set constraint is the categorical. You enforce that a column can for example only be `Male` or `Female`. If sparse then `NaN` may also be valid.
+
+Another type of constraint I often see is discrete sets which are ordinal and not necessarily categorical.
+
+<NoticeBox notice="Don't confuse types with modelling!" noticeType="note">
+  We are not discussing how types/constraints should be treated during
+  modelling, they may be treated as categoricals even if they are discrete
+  ordinals, but rather the true form of the dataset constraint that they take.
+  The same is true for data types, while some columns may be `int`, in practice
+  they are often treated as `float` at the modelling stage.
+</NoticeBox>
+
+For example a column may specify the power levels of a machine in terms of Watts. However the machine can only be set to `{50, 100, 125, 150, 200, 250}` Watts. These values are ordinal integers, but must come from a discretely defined set.
+
+### Constraints as Functions
+
+There exist many common types of constraints placed on numerical values, for example that all values must be a multiple of 100.
+
+While it's tempting to start adding edge cases for each specific constraint, it's easier to just
+
+## Row Constraints
+
+### Dependent Constraints
+
+A more complex but common constraint is the dependent one, this is only applicable to row constraints containing more than 1 column.
+
+Think back to the machine power example, different machines may have different allowable power levels. Let's say we have two columns, `Machine Type` and `Power Level`. `Machine Type` is a categorical encoded as a string with the values being the names of the machines: `A` and `B`, with `Power Level` being a discrete integer set.
+
+`Machine Type == A` may allow for the set `{50, 100, 125}` whereas `Machine Type == B` may allow for the set `{50, 100, 200}`.
+
+These are dependent constraints, and they can become highly complex and can contain numerous columns and act in complicated ways. For example if two columns are in a specific configuration, perhaps a third must be sparse.
+
+# Validation
+
+Validation of data is an old concept though it has only seen recent adoption. It also refers to many different types of processes related to validating data.
+
+When we discuss validation, we mean validating that our dataset conforms to the set of defined constraints.
+
+Validation should be perfomed whenever a row is read. Rows are read when:
+
+- a dataset is loaded in
+- a row is appended to a dataset
+- a row is changed inplace.
