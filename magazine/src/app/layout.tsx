@@ -12,6 +12,9 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 // since it's already imported above
 config.autoAddCss = false;
 
+// import katex
+import "katex/dist/katex.min.css";
+
 export const metadata: Metadata = {
   title: "MinorVersion",
   description: "Software Engineering & Applied Mathematics Magazine",
